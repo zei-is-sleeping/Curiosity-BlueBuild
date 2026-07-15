@@ -11,7 +11,6 @@ modules:
         - sdegler/hyprland
         - deltacopy/darkly
         - errornointernet/quickshell
-        - atim/songrec
     install:
       packages:
         - cava
@@ -95,10 +94,18 @@ modules:
         - hypridle
         - hyprlock
         - hyprpicker
-        - songrec
         - translate-shell
         - qalculate
         - wlogout
         - mpvpaper
         - plasma-systemmonitor
         - unzip
+        - firefox
+
+  - type: default-flatpaks
+    configurations:
+      - notify: true 
+        scope: system 
+        install: 
+          - re.fossplant.songrec
+      - scope: user
