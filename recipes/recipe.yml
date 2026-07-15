@@ -7,22 +7,28 @@ image-version: latest
 modules:
   - type: dnf
     repos:
-      files:
-        - avengemedia.repo
-        - ririko66z.repo
       copr:
-        - sdegler/hyprland
+        - ririko66z/dots-hyprland
+        - lionheartp/Hyprland
         - deltacopy/darkly
         - errornointernet/quickshell
-        - atim/starship
+        - lihaohong/yazi
     install:
       packages:
+        - yazi
+        - neovim
+        - atuin
+        - gh
+        - mpd
+        - mpv
+        - ffmpeg
         - cava
         - pavucontrol
         - wireplumber
         - libdbusmenu-gtk3-devel
         - playerctl
         - geoclue2
+        - bsdtar
         - brightnessctl
         - ddcutil
         - bc
@@ -36,23 +42,14 @@ modules:
         - xdg-utils
         - rsync
         - yq
-        - bibata-cursor-theme
         - adw-gtk3-theme
-        - breeze-cursor-theme
-        - breeze-icon-theme
-        - kf6-breeze-icons
-        - breeze-plus-icon-theme
         - darkly
         - eza
         - fish
         - fontconfig
         - kitty
-        - florian-karsten-space-grotesk-fonts
-        - starship
         - material-icons-fonts
-        - google-rubik-vf-fonts
         - twitter-twemoji-fonts
-        - google-sans-flex-vf-fonts
         - hyprland
         - hyprland-guiutils
         - hyprland-qt-support
@@ -64,7 +61,6 @@ modules:
         - polkit-kde
         - dolphin
         - plasma-systemsettings
-        - microtex
         - xdg-desktop-portal
         - xdg-desktop-portal-gtk
         - xdg-desktop-portal-kde
@@ -87,7 +83,6 @@ modules:
         - swappy
         - tesseract
         - tesseract-langpack-eng
-        - tesseract-langpack-chi_sim
         - wf-recorder
         - upower
         - wtype
@@ -102,7 +97,86 @@ modules:
         - qalculate
         - wlogout
         - mpvpaper
-        - plasma-systemmonitor
         - unzip
         - firefox
-        - songrec
+        - sddm
+        - ffmpegthumbnailer
+        - tldr
+        - bat
+        - fzf 
+        - ripgrep
+
+  - type: script
+      snippets:
+        - |
+          echo "Fetching latest rmpc release..."
+          RMPC_URL=$(curl -s https://api.github.com/repos/mierak/rmpc/releases/latest | jq -r '.assets[] | select(.name | test("x86_64.*linux.*tar.gz$")) | .browser_download_url' | head -n 1)
+          curl -sL "$RMPC_URL" | tar -xz -C /tmp
+          find /tmp -type f -name "rmpc" -exec mv {} /usr/bin/rmpc \;
+          chmod +x /usr/bin/rmpc
+
+        - |
+          echo "Stealing Spotify directly from Debian repos..."
+          # Fetch the latest deb URL from Spotify's package manifest
+          SPOTIFY_DEB_URL=$(curl -s "https://repository-origin.spotify.com/dists/testing/non-free/binary-amd64/Packages" | grep "^Filename: " | head -n 1 | awk '{print "https://repository-origin.spotify.com/"$2}')
+          curl -sL "$SPOTIFY_DEB_URL" -o /tmp/spotify.deb
+          
+          # Extract the deb archive
+          cd /tmp
+          ar x spotify.deb
+          
+          # Extract the data payload directly into the root filesystem (/usr/share/spotify, /usr/bin/spotify)
+          tar -xf data.tar.* -C /
+          
+          # Fix the desktop shortcut icon name just in case
+          sed -i 's/Icon=spotify-client/Icon=spotify/' /usr/share/applications/spotify.desktop
+
+        - |
+          echo "Fetching and installing the latest Vesktop RPM..."
+          curl -sL https://vencord.dev/download/vesktop/amd64/rpm -o /tmp/vesktop.rpm
+          dnf install -y /tmp/vesktop.rpm
+
+        - |
+          echo "Fetching latest OpenTabletDriver RPM from GitHub..."
+          # 1. Query the API and use jq to find the URL of the file ending in x86_64.rpm
+          OTD_URL=$(curl -s https://api.github.com/repos/OpenTabletDriver/OpenTabletDriver/releases/latest | jq -r '.assets[] | select(.name | test("x86_64\\.rpm$")) | .browser_download_url' | head -n 1)
+          
+          # 2. Download the file using the dynamic URL
+          curl -sL "$OTD_URL" -o /tmp/opentabletdriver.rpm
+          
+          # 3. Install it natively
+          dnf install -y /tmp/opentabletdriver.rpm
+  
+        - |
+          echo "Starting makepkg equivalent for nwg-look..."
+          
+          # 1. Install the build dependencies temporarily
+          dnf install -y golang gtk3-devel cairo-devel glib2-devel
+          
+          # 2. Clone the repository and enter it
+          git clone https://github.com/nwg-piotr/nwg-look.git /tmp/nwg-look
+          cd /tmp/nwg-look
+          
+          # 3. Compile the application
+          make build
+          
+          # 4. Install it (this automatically drops the binary in /usr/bin/ and the .desktop file in /usr/share/applications/)
+          make install
+          
+          # 5. Clean up the source code and uninstall the compilers so they don't bloat the image!
+          rm -rf /tmp/nwg-look
+          dnf remove -y golang gtk3-devel cairo-devel glib2-devel
+          dnf clean all
+
+          
+
+  - type: default-flatpaks
+    configurations:
+      - notify: false
+      - scope: user
+        install:
+          - org.freedownloadmanager.Manager
+          - com.github.johnfactotum.Foliate
+          - io.github.celluloid_player.Celluloid
+          - org.vinegarhq.Sober
+      - scope: system
