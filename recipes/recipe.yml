@@ -11,6 +11,7 @@ modules:
         - sdegler/hyprland
         - deltacopy/darkly
         - errornointernet/quickshell
+        - atim/songrec
     install:
       packages:
         - cava
