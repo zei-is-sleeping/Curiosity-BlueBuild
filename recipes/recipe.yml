@@ -7,10 +7,14 @@ image-version: latest
 modules:
   - type: dnf
     repos:
+      files:
+        - avengemedia.repo
+        - ririko66z.repo
       copr:
         - sdegler/hyprland
         - deltacopy/darkly
         - errornointernet/quickshell
+        - atim/starship
     install:
       packages:
         - cava
@@ -101,11 +105,4 @@ modules:
         - plasma-systemmonitor
         - unzip
         - firefox
-
-  - type: default-flatpaks
-    configurations:
-      - notify: true 
-        scope: system 
-        install: 
-          - re.fossplant.songrec
-      - scope: user
+        - songrec
