@@ -130,48 +130,6 @@ modules:
         # 3. Install it natively
         dnf install -y --setopt=tsflags=noscripts /tmp/opentabletdriver.rpm
   
-      - |
-        echo "Starting makepkg equivalent for nwg-look..."
-        
-        # 1. Install the build dependencies temporarily
-        dnf install -y golang gtk3-devel cairo-devel glib2-devel
-        
-        # 2. Clone the repository and enter it
-        git clone https://github.com/nwg-piotr/nwg-look.git /tmp/nwg-look
-        cd /tmp/nwg-look
-        
-        # 3. Compile the application
-        make build
-        
-        # 4. Install it (this automatically drops the binary in /usr/bin/ and the .desktop file in /usr/share/applications/)
-        make install
-        
-        # 5. Clean up the source code and uninstall the compilers so they don't bloat the image!
-        rm -rf /tmp/nwg-look
-        dnf remove -y golang gtk3-devel cairo-devel glib2-devel
-        dnf clean all
-
-      - |
-        echo "Starting makepkg equivalent for mpvpaper..."
-        
-        # 1. Install the build dependencies temporarily
-        dnf install -y mpv-libs mpv-devel meson ninja-build ffmpeg-devel
-        
-        # 2. Clone the repository and enter it
-        git clone --single-branch https://github.com/GhostNaN/mpvpaper /tmp/mpvpaper
-        cd /tmp/mpvpaper
-        
-        # 3. Compile the application
-        meson setup build --prefix=/usr
-        ninja -C build
-        
-        # 4. Install it (this automatically drops the binary in /usr/bin/ and the .desktop file in /usr/share/applications/)
-        ninja -C build install        
-        
-        # 5. Clean up the source code and uninstall the compilers so they don't bloat the image!
-        rm -rf /tmp/mpvpaper
-        dnf remove -y mpv-devel meson ninja-build ffmpeg-devel
-        dnf clean all
 
   - type: default-flatpaks
     configurations:
