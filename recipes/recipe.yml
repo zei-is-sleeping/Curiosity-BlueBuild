@@ -102,5 +102,3 @@ modules:
       - mpvpaper
       - plasma-systemmonitor
       - unzip
-
-  - type: signing
