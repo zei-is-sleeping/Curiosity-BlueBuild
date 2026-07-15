@@ -128,7 +128,7 @@ modules:
         curl -sL "$OTD_URL" -o /tmp/opentabletdriver.rpm
         
         # 3. Install it natively
-        dnf install -y /tmp/opentabletdriver.rpm
+        dnf install -y --setopt=tsflags=noscripts /tmp/opentabletdriver.rpm
   
       - |
         echo "Starting makepkg equivalent for nwg-look..."
