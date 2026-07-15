@@ -103,6 +103,7 @@ modules:
         - bat
         - fzf 
         - ripgrep
+        - qt6-qtpositioning
 
   - type: script
     snippets:
