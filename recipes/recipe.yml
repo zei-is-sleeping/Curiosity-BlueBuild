@@ -115,22 +115,6 @@ modules:
         chmod +x /usr/bin/rmpc
   
       - |
-        echo "Stealing Spotify directly from Debian repos..."
-        # Fetch the latest deb URL from Spotify's package manifest
-        SPOTIFY_DEB_URL=$(curl -s "https://repository-origin.spotify.com/dists/testing/non-free/binary-amd64/Packages" | grep "^Filename: " | head -n 1 | awk '{print "https://repository-origin.spotify.com/"$2}')
-        curl -sL "$SPOTIFY_DEB_URL" -o /tmp/spotify.deb
-        
-        # Extract the deb archive
-        cd /tmp
-        ar x spotify.deb
-        
-        # Extract the data payload directly into the root filesystem (/usr/share/spotify, /usr/bin/spotify)
-        tar -xf data.tar.* -C /
-        
-        # Fix the desktop shortcut icon name just in case
-        sed -i 's/Icon=spotify-client/Icon=spotify/' /usr/share/applications/spotify.desktop
-  
-      - |
         echo "Fetching and installing the latest Vesktop RPM..."
         curl -sL https://vencord.dev/download/vesktop/amd64/rpm -o /tmp/vesktop.rpm
         dnf install -y /tmp/vesktop.rpm
@@ -198,4 +182,5 @@ modules:
           - com.github.johnfactotum.Foliate
           - io.github.celluloid_player.Celluloid
           - org.vinegarhq.Sober
+          - com.spotify.Client
       - scope: system
