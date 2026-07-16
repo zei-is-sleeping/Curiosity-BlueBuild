@@ -11,10 +11,14 @@ modules:
         - lionheartp/Hyprland
         - deltacopy/darkly
         - errornointernet/quickshell
+        - brycensranch/gpu-screen-recorder-git
         - lihaohong/yazi
+        - xabi08/MSI-EC
     install:
       packages:
         - yazi
+        - msi-ec-kmod
+        - gpu-screen-recorder
         - neovim
         - atuin
         - gh
@@ -99,37 +103,50 @@ modules:
         - firefox
         - sddm
         - ffmpegthumbnailer
-        - tldr
         - bat
         - fzf 
         - ripgrep
         - qt6-qtpositioning
+        - breeze-icon-theme
+        - kf6-breeze-icons
+        - p7zip
+        - p7zip-plugins 
+        - android-tools
+        - aria2
+        - atuin
+        - bat
+        - blueman
+        - btop 
+        - celluloid
+        - evtest
+        - fzf
+        - gdu
+        - papirus-icon-theme
+        - power-profiles-daemon
+        - stow 
+        - usbip
+        - wireguard-tools
+        - zoxide
+        - obs-studio
+        - mediawriter
+        - tealdeer
+        - usbutils
+        - pciutils
+        - inxi
+        - lshw
+        - lm_sensors
+        - smartmontools
+        - nvtop
+        - iputils
+        - bind-utils
+        - nmap
+        - traceroute
+        - iproute
+        - fd-find
+        - tree
+        - gamemode
+        - gamescope
 
-  - type: script
-    snippets:
-      - |
-        echo "Fetching latest rmpc release..."
-        RMPC_URL=$(curl -s https://api.github.com/repos/mierak/rmpc/releases/latest | jq -r '.assets[] | select(.name | test("x86_64.*linux.*tar.gz$")) | .browser_download_url' | head -n 1)
-        curl -sL "$RMPC_URL" | tar -xz -C /tmp
-        find /tmp -type f -name "rmpc" -exec mv {} /usr/bin/rmpc \;
-        chmod +x /usr/bin/rmpc
-  
-      - |
-        echo "Fetching and installing the latest Vesktop RPM..."
-        curl -sL https://vencord.dev/download/vesktop/amd64/rpm -o /tmp/vesktop.rpm
-        dnf install -y /tmp/vesktop.rpm
-  
-      - |
-        echo "Fetching latest OpenTabletDriver RPM from GitHub..."
-        # 1. Query the API and use jq to find the URL of the file ending in x86_64.rpm
-        OTD_URL=$(curl -s https://api.github.com/repos/OpenTabletDriver/OpenTabletDriver/releases/latest | jq -r '.assets[] | select(.name | test("x86_64\\.rpm$")) | .browser_download_url' | head -n 1)
-        
-        # 2. Download the file using the dynamic URL
-        curl -sL "$OTD_URL" -o /tmp/opentabletdriver.rpm
-        
-        # 3. Install it natively
-        dnf install -y --setopt=tsflags=noscripts /tmp/opentabletdriver.rpm
-  
 
   - type: default-flatpaks
     configurations:
@@ -141,4 +158,16 @@ modules:
           - io.github.celluloid_player.Celluloid
           - org.vinegarhq.Sober
           - com.spotify.Client
+          - com.usebottles.bottles
       - scope: system
+
+  - type: script
+    scripts:
+      - install-rmpc.sh
+      - install-vesktop.sh 
+      - install-opentabletdriver.sh
+      - install-mpvpaper.sh
+      - install-openclaw.sh
+      - install-mpd-mpris.sh
+      - install-gogcli.sh
+      - install-mcontrolcenter.sh
