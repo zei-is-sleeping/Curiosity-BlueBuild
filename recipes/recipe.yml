@@ -5,12 +5,17 @@ base-image: ghcr.io/blue-build/base-images/fedora-base-nvidia-open
 image-version: latest 
 
 modules:
+  - type: script
+    snippets:
+      - |
+        echo "fastestmirror=True" >> /etc/dnf/dnf.conf
+        echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
+
   - type: dnf
     repos:
       copr:
         - lionheartp/Hyprland
         - deltacopy/darkly
-        - errornointernet/quickshell
         - brycensranch/gpu-screen-recorder-git
         - lihaohong/yazi
         - xabi08/MSI-EC
@@ -79,7 +84,7 @@ modules:
         - python3.12
         - python3-devel
         - python3.12-devel
-        - quickshell-git
+        - quickshell
         - matugen
         - hyprshot
         - slurp
