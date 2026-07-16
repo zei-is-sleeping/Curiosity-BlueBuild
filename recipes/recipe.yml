@@ -14,7 +14,8 @@ modules:
   - type: dnf
     repos:
       copr:
-        - lionheartp/Hyprland
+        - sdegler/hyprland
+        - avengemedia/danklinux
         - deltacopy/darkly
         - brycensranch/gpu-screen-recorder-git
         - lihaohong/yazi
@@ -84,7 +85,7 @@ modules:
         - python3.12
         - python3-devel
         - python3.12-devel
-        - quickshell
+        - quickshell-git
         - matugen
         - hyprshot
         - slurp
