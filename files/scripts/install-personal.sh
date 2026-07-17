@@ -14,7 +14,9 @@ fi
 if [ -L "/opt" ]; then
     echo "==> Removing /opt symlink to allow proprietary AUR installations..."
     rm -f /opt
-    mkdir -p /opt
+    mkdir -p /usr/lib/opt
+    ln -s usr/lib/opt /opt 
+
 fi
 
 echo "==> Installing personal AUR packages..."
