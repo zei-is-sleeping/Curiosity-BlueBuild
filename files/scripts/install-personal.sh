@@ -14,8 +14,7 @@ fi
 if [ -L "/opt" ]; then
     echo "==> Removing /opt symlink to allow proprietary AUR installations..."
     rm -f /opt
-    mkdir -p /usr/lib/opt
-    ln -s usr/lib/opt /opt 
+    mkdir -p /opt
 
 fi
 
@@ -125,5 +124,17 @@ sudo -u builder bash -c '
         echo "No personal packages defined. Skipping."
     fi
 '
+
+echo "==> Relocating /opt to /usr/lib/opt for OSTree persistence..."
+mkdir -p /usr/lib/opt
+
+# Move all the installed proprietary apps into the OSTree-tracked /usr directory
+if [ "$(ls -A /opt)" ]; then
+    cp -a /opt/. /usr/lib/opt/
+fi
+
+# Replace the real directory with the runtime symlink!
+rm -rf /opt
+ln -s usr/lib/opt /opt
 
 echo "==> Personal packages installed."
