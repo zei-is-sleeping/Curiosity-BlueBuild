@@ -1,4 +1,7 @@
-echo "==> Preparing builder environment for personal packages..."
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Preparing builder environment for dotfiles..."
 
 # Recreate the builder's home directory if the OCI runtime wiped it between layers
 if [ ! -d "/var/home/builder" ]; then
@@ -14,11 +17,10 @@ sudo -u builder bash -c '
     git clone --depth=1 https://github.com/end-4/dots-hyprland.git
 '
 
-# 2. The Headless Meta-Package Builder
+# The Headless Meta-Package Builder
 sudo -u builder bash -c '
     cd ~/dots-hyprland/sdata/dist-arch
     
-    # The exact list of meta-packages from End-4s install-deps.sh
     metapkgs=(
         illogical-impulse-audio
         illogical-impulse-backlight
@@ -40,20 +42,26 @@ sudo -u builder bash -c '
         echo "==> Building $pkg"
         cd "$pkg"
         
-        # Source the PKGBUILD to get his specific depends array
+        # Unset arrays to prevent bleeding between loop iterations
+        unset depends makedepends
+        
         source ./PKGBUILD
         
-        # Install dependencies natively if they exist (prevents yay from crashing on empty arrays)
-        if [ ${#depends[@]} -gt 0 ]; then
-            yay -S --noconfirm --asdeps "${depends[@]}"
+        # Safely combine depends and makedepends if they exist
+        deps_to_install=()
+        if [ ${#depends[@]} -gt 0 ]; then deps_to_install+=("${depends[@]}"); fi
+        if [ ${#makedepends[@]} -gt 0 ]; then deps_to_install+=("${makedepends[@]}"); fi
+        
+        # Install dependencies via yay (yes pipe bypasses provider prompts)
+        if [ ${#deps_to_install[@]} -gt 0 ]; then
+            yes "" | yay -S --noconfirm --asdeps "${deps_to_install[@]}"
         fi
         
-        # Build and install the meta-package itself
-        makepkg -Afsi --noconfirm
+        # Build and install the meta-package
+        yes "" | makepkg -Afsi --noconfirm
         
         cd ..
     done
     
-    # Force install the optional plasma integration without the [y/N] prompt
-    yay -S --noconfirm plasma-browser-integration
+    yes "" | yay -S --noconfirm plasma-browser-integration
 '
