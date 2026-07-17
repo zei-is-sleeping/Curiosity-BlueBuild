@@ -39,15 +39,19 @@ echo "==> Swapping Arch kernel for CachyOS BORE..."
 pacman -S --noconfirm linux-cachyos-bore linux-cachyos-bore-headers linux-cachyos-bore-nvidia-open nvidia-utils
 
 echo "==> Purging stock Linux kernel..."
-echo "==> Purging stock Linux kernel..."
-pacman -Rns --noconfirm linux linux-headers || true
+# Split these up! If headers is missing, still nuke the kernel!
+pacman -Rns --noconfirm linux || true
+pacman -Rns --noconfirm linux-headers || true
 
 # Force delete any orphaned kernel module directories so bootc doesn't panic!
 find /usr/lib/modules -mindepth 1 -maxdepth 1 ! -name "*cachyos*" -exec rm -rf {} +
 
 echo "==> Moving CachyOS kernel to canonical bootc location..."
 KVER=$(ls /usr/lib/modules)
-cp /boot/vmlinuz-* /usr/lib/modules/$KVER/vmlinuz
+# Explicit file names! No more wildcards!
+cp /boot/vmlinuz-linux-cachyos-bore /usr/lib/modules/$KVER/vmlinuz
 cp /boot/initramfs-linux-cachyos-bore.img /usr/lib/modules/$KVER/initramfs.img
+
+echo "==> CachyOS Preset applied successfully."
 
 echo "==> CachyOS Preset applied successfully."
