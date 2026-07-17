@@ -42,6 +42,7 @@ modules:
   - type: script 
     scripts:
       - install-personal.sh 
+      - install-openclaw.sh
 
   # All the root filesystem based configs go here
   - type: script 
