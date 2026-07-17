@@ -63,6 +63,7 @@ modules:
         - NetworkManager
         - fstrim 
         - smartd
+        - bootc-fetch-apply-updates.timer
     user: 
       enabled: 
         - ydotool 
