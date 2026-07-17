@@ -21,4 +21,4 @@ curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
 tar xvf cachyos-repo.tar.xz
 cd cachyos-repo
 # The script automatically detects your v3 architecture and modifies pacman.conf
-./cachyos-repo.sh
+yes "" | ./cachyos-repo.sh
