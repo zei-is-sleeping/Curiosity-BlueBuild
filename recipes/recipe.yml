@@ -179,6 +179,7 @@ modules:
       - install-gogcli.sh
       - install-mcontrolcenter.sh
       - install-sddm-qylock.sh
+      - install-surge.sh
 
   - type: systemd
     system:
