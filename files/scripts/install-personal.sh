@@ -95,6 +95,23 @@ sudo -u builder bash -c '
 
         quickshell
         plasma-browser-integration
+
+
+        vivaldi 
+        zen-browser-bin
+        obsidian
+        bootupd
+        btop
+        tealdeer 
+        lazygit 
+        unrar 
+        zip 
+        evtest 
+        wev 
+        fuse2 
+        appimagelauncher
+        python-pipx 
+        flatseal 
     )
     
     # Pipe yes into yay to automatically handle virtual provider prompts

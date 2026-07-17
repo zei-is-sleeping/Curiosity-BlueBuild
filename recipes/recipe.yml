@@ -60,9 +60,13 @@ modules:
         - bluetooth 
         - power-profiles-daemon 
         - sddm 
+        - NetworkManager
+        - fstrim 
+        - smartd
     user: 
       enabled: 
         - ydotool 
         - opentabletdriver 
         - mpd 
         - mpd-mpris
+        - podman.socket
