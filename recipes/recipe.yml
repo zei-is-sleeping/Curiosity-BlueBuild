@@ -1,193 +1,68 @@
 name: curiosity
-description: Trying out an atomic os for the first time.
+description: curiosity killed the cat, but its not dead yet
 
-base-image: ghcr.io/blue-build/base-images/fedora-base-nvidia-open
+base-image: ghcr.io/bootcrew/arch-bootc
 image-version: latest 
 
 modules:
-  - type: script
-    snippets:
-      - |
-        echo "fastestmirror=True" >> /etc/dnf/dnf.conf
-        echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
-
-  - type: dnf
-    repos:
-      copr:
-        - sdegler/hyprland
-        - avengemedia/danklinux
-        - deltacopy/darkly
-        - brycensranch/gpu-screen-recorder-git
-        - lihaohong/yazi
-        - xabi08/MSI-EC
-    install:
-      packages:
-        - yazi
-        - msi-ec-kmod
-        - gpu-screen-recorder
-        - neovim
-        - atuin
-        - gh
-        - mpd
-        - mpv
-        - ffmpeg
-        - cava
-        - pavucontrol
-        - wireplumber
-        - libdbusmenu-gtk3-devel
-        - playerctl
-        - geoclue2
-        - bsdtar
-        - brightnessctl
-        - ddcutil
-        - bc
-        - coreutils
-        - cliphist
-        - cmake
-        - curl
-        - wget2
-        - ripgrep
-        - jq
-        - xdg-utils
-        - rsync
-        - yq
-        - adw-gtk3-theme
-        - darkly
-        - eza
-        - fish
-        - fontconfig
-        - kitty
-        - material-icons-fonts
-        - twitter-twemoji-fonts
-        - hyprland
-        - hyprland-guiutils
-        - hyprland-qt-support
-        - hyprsunset
-        - wl-clipboard
-        - bluedevil
-        - gnome-keyring
-        - plasma-nm
-        - plasma-integration-qt5
-        - plasma-integration
-        - polkit-kde
-        - dolphin
-        - nemo
-        - plasma-systemsettings
-        - xdg-desktop-portal
-        - xdg-desktop-portal-gtk
-        - xdg-desktop-portal-kde
-        - xdg-desktop-portal-hyprland
-        - clang
-        - uv
-        - gtk4-devel
-        - libadwaita-devel
-        - libsoup3-devel
-        - libportal-gtk4
-        - gobject-introspection-devel
-        - python3
-        - python3.12
-        - python3-devel
-        - python3.12-devel
-        - quickshell-git
-        - matugen
-        - hyprshot
-        - slurp
-        - swappy
-        - tesseract
-        - tesseract-langpack-eng
-        - wf-recorder
-        - upower
-        - wtype
-        - ydotool
-        - fuzzel
-        - glib2
-        - ImageMagick
-        - hypridle
-        - hyprlock
-        - hyprpicker
-        - translate-shell
-        - qalculate
-        - wlogout
-        - unzip
-        - firefox
-        - sddm
-        - ffmpegthumbnailer
-        - bat
-        - fzf 
-        - ripgrep
-        - qt6-qtpositioning
-        - breeze-icon-theme
-        - kf6-breeze-icons
-        - p7zip
-        - p7zip-plugins 
-        - android-tools
-        - aria2
-        - atuin
-        - bat
-        - blueman
-        - btop 
-        - celluloid
-        - evtest
-        - fzf
-        - gdu
-        - papirus-icon-theme
-        - power-profiles-daemon
-        - stow 
-        - usbip
-        - wireguard-tools
-        - zoxide
-        - obs-studio
-        - mediawriter
-        - tealdeer
-        - usbutils
-        - pciutils
-        - inxi
-        - lshw
-        - lm_sensors
-        - smartmontools
-        - nvtop
-        - iputils
-        - bind-utils
-        - nmap
-        - traceroute
-        - iproute
-        - fd-find
-        - tree
-        - gamemode
-        - gamescope
-
-
-  - type: default-flatpaks
-    configurations:
-      - notify: false
-      - scope: user
-        install:
-          - com.github.johnfactotum.Foliate
-          - org.vinegarhq.Sober
-          - com.spotify.Client
-          - com.usebottles.bottles
-      - scope: system
-
+  # CachyOS related modifications like better repos and mirrorlists oh and kernel comes from here-
   - type: script
     scripts:
-      - install-rmpc.sh
-      - install-vesktop.sh 
-      - install-opentabletdriver.sh
-      - install-mpvpaper.sh
-      - install-openclaw.sh
-      - install-mpd-mpris.sh
-      - install-gogcli.sh
-      - install-mcontrolcenter.sh
-      - install-sddm-qylock.sh
-      - install-surge.sh
+      - preset-cachyos.sh
 
-  - type: systemd
-    system:
-      enabled:
+  # Minimalist startup for something that ALWAYS builds
+  - type: pacman
+    install:
+      packages:
+        - base-devel
+        - git
+        - curl
+        - sudo
+        - yazi  
+        - nvim 
+        - unzip
+        - libarchive
+        - ripgrep 
+        - fd 
+        - fzf 
+        - bat 
+        - eza
+
+  # Setup Yay
+  - type: script
+    scripts:
+      - setup-yay-user.sh
+
+  # Dotfiles installation
+  - type: script 
+    scripts:
+      - install-dotfiles-deps.sh 
+
+  # My own favourites, doesn't include all so some of them could be a part of dotfiles
+  - type: script 
+    scripts:
+      - install-personal.sh 
+
+  # All the root filesystem based configs go here
+  - type: script 
+    scripts:
+      - install-sddm-qylock.sh
+
+  # cleanup the temporary builder user for yay
+  - type: script 
+    scripts: 
+      - cleanup-yay-user.sh
+
+  - type: systemd 
+    system: 
+      enabled: 
+        - bluetooth 
+        - power-profiles-daemon 
+        - sddm 
+        - reflector.timer 
+    user: 
+      enabled: 
         - ydotool 
-        - power-profiles-daemon
-    user:
-      enabled:
-        - opentabletdriver
+        - opentabletdriver 
         - mpd 
         - mpd-mpris
