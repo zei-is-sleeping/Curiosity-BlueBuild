@@ -114,6 +114,8 @@ sudo -u builder bash -c '
         appimagelauncher
         python-pipx 
         flatseal 
+        topgrade
+        boxbuddy
     )
     
     # Pipe yes into yay to automatically handle virtual provider prompts
