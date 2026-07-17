@@ -10,6 +10,13 @@ if [ ! -d "/var/home/builder" ]; then
     chown builder:builder /var/home/builder
 fi
 
+# This allows proprietary AUR packages (Spotify, Vesktop, FDM) to install directly into the image
+if [ -L "/opt" ]; then
+    echo "==> Removing /opt symlink to allow proprietary AUR installations..."
+    rm -f /opt
+    mkdir -p /opt
+fi
+
 echo "==> Installing personal AUR packages..."
 
 # Run the installation as the builder user
