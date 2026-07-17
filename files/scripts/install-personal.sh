@@ -26,6 +26,7 @@ sudo -u builder bash -c '
     packages=(
         mcontrolcenter
         msi-ec-dkms-git
+        celluloid
         kitty
         github-cli
         power-profiles-daemon 
