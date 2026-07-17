@@ -67,8 +67,11 @@ modules:
         - bluedevil
         - gnome-keyring
         - plasma-nm
+        - plasma-integration-qt5
+        - plasma-integration
         - polkit-kde
         - dolphin
+        - nemo
         - plasma-systemsettings
         - xdg-desktop-portal
         - xdg-desktop-portal-gtk
