@@ -177,3 +177,14 @@ modules:
       - install-mpd-mpris.sh
       - install-gogcli.sh
       - install-mcontrolcenter.sh
+
+  - type: systemd
+    system:
+      enabled:
+        - ydotool 
+        - power-profiles-daemon
+    user:
+      enabled:
+        - opentabletdriver
+        - mpd 
+        - mpd-mpris
