@@ -36,7 +36,6 @@ sudo -u builder bash -c '
         mpv
         ffmpeg
         ffmpegthumbnailer
-        pavucontrol 
         nvidia-prime 
         atuin 
         pipewire
@@ -92,7 +91,7 @@ sudo -u builder bash -c '
         flatpak
 
         
-        cava pavucontrol-qt wireplumber pipewire-pulse libdbusmenu-gtk3 playerctl geoclue brightnessctl ddcutil bc coreutils cliphist cmake curl wget ripgrep jq xdg-user-dirs rsync go-yq adw-gtk-theme-git breeze breeze-plus darkly-bin eza fish fontconfig kitty matugen otf-space-grotesk starship ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-readex-pro ttf-rubik-vf ttf-twemoji hyprland hyprsunset wl-clipboard bluedevil gnome-keyring networkmanager plasma-nm polkit-kde-agent dolphin systemsettings xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gtk xdg-desktop-portal-hyprland clang uv gtk4 libadwaita libsoup3 libportal-gtk4 gobject-introspection hyprshot slurp swappy tesseract tesseract-data-eng wf-recorder upower wtype ydotool fuzzel glib2 imagemagick hypridle hyprlock hyprpicker songrec translate-shell wlogout libqalculate
+        cava pavucontrol-qt wireplumber pipewire-pulse libdbusmenu-gtk3 playerctl geoclue brightnessctl ddcutil bc coreutils cliphist cmake curl wget ripgrep jq xdg-user-dirs rsync go-yq adw-gtk-theme-git breeze breeze-plus darkly-bin eza fish fontconfig kitty matugen otf-space-grotesk starship ttf-jetbrains-mono-nerd ttf-material-symbols-variable-git ttf-readex-pro ttf-rubik-vf hyprland hyprsunset wl-clipboard bluedevil gnome-keyring networkmanager plasma-nm polkit-kde-agent dolphin systemsettings xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gtk xdg-desktop-portal-hyprland clang uv gtk4 libadwaita libsoup3 libportal-gtk4 gobject-introspection hyprshot slurp swappy tesseract tesseract-data-eng wf-recorder upower wtype ydotool fuzzel glib2 imagemagick hypridle hyprlock hyprpicker songrec translate-shell wlogout libqalculate
 
         quickshell
         plasma-browser-integration
