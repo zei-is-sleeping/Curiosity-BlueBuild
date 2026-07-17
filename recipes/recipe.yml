@@ -162,9 +162,7 @@ modules:
       - notify: false
       - scope: user
         install:
-          - org.freedownloadmanager.Manager
           - com.github.johnfactotum.Foliate
-          - io.github.celluloid_player.Celluloid
           - org.vinegarhq.Sober
           - com.spotify.Client
           - com.usebottles.bottles
@@ -180,6 +178,7 @@ modules:
       - install-mpd-mpris.sh
       - install-gogcli.sh
       - install-mcontrolcenter.sh
+      - install-sddm-qylock.sh
 
   - type: systemd
     system:
