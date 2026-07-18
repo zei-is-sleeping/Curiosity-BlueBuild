@@ -6,13 +6,14 @@ echo "==> Deploying global compiler gaslight wrappers for v3 architecture..."
 mkdir -p /usr/local/bin
 
 # 1. C/C++ Compilers (GCC & Clang)
-# These use -march=native and -mtune=native
 cat << 'EOF' | tee /usr/local/bin/gcc /usr/local/bin/g++ /usr/local/bin/cc /usr/local/bin/c++ /usr/local/bin/clang /usr/local/bin/clang++ > /dev/null
 #!/bin/bash
 NEW_ARGS=()
 for arg in "$@"; do
-    if [[ "$arg" == "-march=native" || "$arg" == "-mtune=native" ]]; then
-        NEW_ARGS+=("${arg//native/x86-64-v3}")
+    if [[ "$arg" == "-march=native" ]]; then
+        NEW_ARGS+=("-march=x86-64-v3")
+    elif [[ "$arg" == "-mtune=native" ]]; then
+        NEW_ARGS+=("-mtune=generic")
     else
         NEW_ARGS+=("$arg")
     fi
@@ -44,4 +45,4 @@ chmod +x /usr/local/bin/clang /usr/local/bin/clang++ /usr/local/bin/rustc
 # We export this to the system profile so build scripts pick it up
 echo "export GOAMD64=v3" > /etc/profile.d/go-v3-gaslight.sh
 
-echo "==> Hardware gaslighting active. All compilations will now target x86-64-v3."
+echo "==> Hardware gaslighting active. All compilations will now safely target x86-64-v3."
