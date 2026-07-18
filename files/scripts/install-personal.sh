@@ -40,7 +40,8 @@ sudo -u builder bash -c '
         ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common
         ttf-roboto ttf-ubuntu-font-family noto-fonts noto-fonts-cjk noto-fonts-emoji 
         trash-cli podman-tui lazydocker plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
-        ouch 
+        ouch zram-generator easyeffects keyd 
+        jujutsu below
     )
     
     if [ ${#packages[@]} -gt 0 ]; then

@@ -3,6 +3,8 @@ set -euo pipefail
 
 echo "==> Deploying global compiler gaslight wrappers for v3 architecture..."
 
+mkdir -p /usr/local/bin
+
 # 1. C/C++ Compilers (GCC & Clang)
 # These use -march=native and -mtune=native
 cat << 'EOF' | tee /usr/local/bin/gcc /usr/local/bin/g++ /usr/local/bin/cc /usr/local/bin/c++ /usr/local/bin/clang /usr/local/bin/clang++ > /dev/null
