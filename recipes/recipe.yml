@@ -32,6 +32,7 @@ modules:
   - type: script
     scripts:
       - setup-yay-user.sh
+      - setup-v3-gaslight.sh
 
   # Dotfiles installation
   - type: script 
