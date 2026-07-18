@@ -23,12 +23,12 @@ sudo -u builder bash -c '
         mcontrolcenter msi-ec-dkms-git celluloid kitty github-cli power-profiles-daemon 
         bluez bluez-utils blueman mpd mpd-mpris mpv ffmpeg ffmpegthumbnailer nvidia-prime 
         atuin pipewire pipewire-pulse zoxide fish fisher rnote opentabletdriver p7zip 
-        firefox-pure aria2 freedownloadmanager gdu spotify spicetify-cli vesktop 
+        aria2 freedownloadmanager gdu spotify-launcher spicetify-cli vesktop 
         inxi lshw lm_sensors nvtop iputils smartmontools nvidia-utils bind-utils iproute 
         nmap gamemode gamescope wine-cachyos winetricks rmpc surge btrfs-progs 
         compsize btrfsmaintenance snapper podman podman-compose podman-docker fuse-overlayfs 
         slirp4netns crun netavark aardvark-dns distrobox toolbox skopeo xorg-xhost flatpak 
-        vivaldi obsidian bootupd btop tealdeer lazygit unrar zip evtest 
+        obsidian bootupd btop tealdeer lazygit unrar zip evtest 
         wev fuse2 appimagelauncher python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
         ydotool cava bc jq rsync wget wf-recorder hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
         polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode python-pip 
@@ -42,6 +42,9 @@ sudo -u builder bash -c '
         trash-cli podman-tui lazydocker plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
         ouch zram-generator easyeffects keyd ananicy-cpp
         jujutsu
+
+        zen-browser-bin
+        thorium-browser-avx2-bin
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
