@@ -67,7 +67,6 @@ modules:
         - bootc-fetch-apply-updates.timer
         - systemd-resolved
         - keyd
-        - ananicy-cpp
     user: 
       enabled: 
         - ydotool 
