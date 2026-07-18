@@ -16,14 +16,6 @@ echo "==> Initializing pacman keyring for third-party signatures..."
 pacman-key --init
 pacman-key --populate archlinux
 
-echo "==> Injecting Ryoku Repository..."
-curl -fsSL https://raw.githubusercontent.com/neur0map/ryoku-arch/main/release/packages/ryoku-keyring/ryoku.gpg -o /usr/share/pacman/keyrings/ryoku.gpg
-curl -fsSL https://raw.githubusercontent.com/neur0map/ryoku-arch/main/release/packages/ryoku-keyring/ryoku-trusted -o /usr/share/pacman/keyrings/ryoku-trusted
-curl -fsSL https://raw.githubusercontent.com/neur0map/ryoku-arch/main/release/packages/ryoku-keyring/ryoku-revoked -o /usr/share/pacman/keyrings/ryoku-revoked
-pacman-key --populate ryoku
-rm -f /usr/share/pacman/keyrings/ryoku.gpg /usr/share/pacman/keyrings/ryoku-trusted /usr/share/pacman/keyrings/ryoku-revoked
-echo -e "\n[ryoku]\nSigLevel = Required\nServer = https://repo.ryoku.dev/stable/\$arch\n" >> /etc/pacman.conf
-
 echo "==> Injecting CachyOS Repositories (x86-64-v3)..."
 cd /tmp
 curl -O https://mirror.cachyos.org/cachyos-repo.tar.xz
@@ -58,4 +50,4 @@ KVER=$(ls /usr/lib/modules)
 cp /boot/vmlinuz-linux-cachyos-bore /usr/lib/modules/$KVER/vmlinuz
 cp /boot/initramfs-linux-cachyos-bore.img /usr/lib/modules/$KVER/initramfs.img
 
-echo "==> CachyOS and Ryoku Presets applied successfully."
+echo "==> CachyOS Presets applied successfully."
