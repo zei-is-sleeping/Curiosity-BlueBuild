@@ -45,6 +45,7 @@ sudo -u builder bash -c '
 
         zen-browser-bin
         thorium-browser-avx2-bin
+        starship
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
