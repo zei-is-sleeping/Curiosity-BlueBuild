@@ -64,6 +64,7 @@ modules:
         - fstrim 
         - smartd
         - bootc-fetch-apply-updates.timer
+        - systemd-resolved
     user: 
       enabled: 
         - ydotool 
