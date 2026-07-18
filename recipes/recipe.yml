@@ -46,9 +46,9 @@ modules:
       - install-openclaw.sh
 
   # All the root filesystem based configs go here
-  - type: script 
-    scripts:
-      - install-sddm-qylock.sh
+  # - type: script 
+    # scripts:
+      # - install-sddm-qylock.sh
 
   # cleanup the temporary builder user for yay
   - type: script 
@@ -60,7 +60,7 @@ modules:
       enabled: 
         - bluetooth 
         - power-profiles-daemon 
-        - sddm 
+        - greetd 
         - NetworkManager
         - fstrim 
         - smartd
