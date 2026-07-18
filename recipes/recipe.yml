@@ -34,6 +34,14 @@ modules:
       - setup-yay-user.sh
       - setup-v3-gaslight.sh
 
+  - type: kargs
+    kargs:
+      - mitigations=off
+      - nowatchdog
+      - rcutree.enable_rcu_lazy=1
+      - nvidia_drm.modeset=1
+      - nvidia_drm.fbdev=1
+
   # Dotfiles installation
   - type: script 
     scripts:
@@ -67,6 +75,10 @@ modules:
         - bootc-fetch-apply-updates.timer
         - systemd-resolved
         - keyd
+        - scx 
+        - ananicy
+        - nohang-desktop
+        - bpftune
     user: 
       enabled: 
         - ydotool 

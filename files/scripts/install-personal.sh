@@ -32,7 +32,7 @@ sudo -u builder bash -c '
         wev fuse2 appimagelauncher python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
         ydotool cava bc jq rsync wget wf-recorder hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
         polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode python-pip 
-        python-pipx hyprland uwsm cliphist wl-clipboard adw-gtk-theme
+        python-pipx hyprland uwsm cliphist wl-clipboard adw-gtk-theme wireplumber intel-media-driver vulkan-intel
 
         noctalia-git
 
@@ -46,6 +46,8 @@ sudo -u builder bash -c '
         zen-browser-bin
         thorium-browser-avx2-bin
         starship
+
+        scx-sheds cachyos-settings nohang fwupd bpftune
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
