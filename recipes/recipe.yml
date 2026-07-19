@@ -88,9 +88,9 @@ modules:
         - thermald 
         - switcheroo-control
         - scx_loader
-        - ananicy-cpp
         - nohang-desktop
         - bpftune
+        - opt-overlay
     user: 
       enabled: 
         - ydotool 

@@ -1,0 +1,16 @@
+[Unit]
+Description=Mount OverlayFS for /opt
+After=local-fs.target
+RequiresMountsFor=/var
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# Create the persistence directories in /var before mounting
+ExecStartPre=/usr/bin/mkdir -p /var/opt-upper /var/opt-work /opt
+# Stack the transparency sheet (/var) over the printed paper (/usr/lib/opt) and mount it to /opt
+ExecStart=/usr/bin/mount -t overlay overlay -o lowerdir=/usr/lib/opt,upperdir=/var/opt-upper,workdir=/var/opt-work /opt
+ExecStop=/usr/bin/umount /opt
+
+[Install]
+WantedBy=sysinit.target
