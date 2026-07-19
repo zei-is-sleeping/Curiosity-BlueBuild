@@ -59,6 +59,7 @@ modules:
   # My own favourites, doesn't include all so some of them could be a part of dotfiles
   - type: script 
     scripts:
+      - install-aur-compiles.sh
       - install-personal.sh 
       - install-openclaw.sh
 

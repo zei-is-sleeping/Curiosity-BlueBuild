@@ -25,22 +25,21 @@ sudo -u builder bash -c '
         atuin pipewire pipewire-pulse zoxide fish fisher rnote opentabletdriver p7zip 
         aria2 freedownloadmanager gdu spicetify-cli vesktop 
         inxi lshw lm_sensors nvtop iputils smartmontools nvidia-utils bind-utils iproute 
-        nmap gamemode gamescope wine-cachyos winetricks rmpc surge btrfs-progs 
+        nmap gamemode gamescope wine-cachyos winetricks rmpc surge-bin btrfs-progs 
         compsize btrfsmaintenance snapper podman podman-compose podman-docker fuse-overlayfs 
         slirp4netns crun netavark aardvark-dns distrobox toolbox skopeo xorg-xhost flatpak 
-        obsidian bootupd btop tealdeer lazygit unrar zip evtest 
-        wev fuse2 appimagelauncher python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
+        obsidian btop tealdeer lazygit unrar zip evtest 
+        wev fuse2 appimagelauncher-bin python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
         ydotool cava bc jq rsync wget wf-recorder hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
         polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode python-pip 
         python-pipx hyprland uwsm cliphist wl-clipboard adw-gtk-theme wireplumber intel-media-driver vulkan-intel
         papirus-icon-theme
 
-        noctalia-git
 
         apple-fonts upower adw-gtk-theme nwg-look nwg-displays qt6ct-kde kvantum greetd noctalia-greeter-git accountsservice qt6-wayland 
         ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common
         ttf-roboto ttf-ubuntu-font-family noto-fonts noto-fonts-cjk noto-fonts-emoji 
-        trash-cli podman-tui lazydocker plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
+        trash-cli lazydocker plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
         ouch zram-generator easyeffects keyd ananicy-cpp
         jujutsu
 
@@ -49,7 +48,7 @@ sudo -u builder bash -c '
         starship
 
         scx-scheds scx-tools cachyos-settings nohang fwupd bpftune
-        preload-ng-git thermald switcheroo-control nvidia-prime mold
+        thermald switcheroo-control nvidia-prime mold
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
