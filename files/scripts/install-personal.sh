@@ -48,6 +48,7 @@ sudo -u builder bash -c '
         starship
 
         scx-scheds cachyos-settings nohang fwupd bpftune
+        preload-ng-git thermald switcheroo-control nvidia-prime mold
     )
     
     if [ ${#packages[@]} -gt 0 ]; then

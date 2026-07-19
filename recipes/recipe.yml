@@ -18,6 +18,7 @@ modules:
         - git
         - curl
         - sudo
+        - mold
         - yazi  
         - nvim 
         - unzip
@@ -75,6 +76,10 @@ modules:
         - bootc-fetch-apply-updates.timer
         - systemd-resolved
         - keyd
+        - preload-ng 
+        - thermald 
+        - switcheroo-control
+        - scx_loader
         - ananicy-cpp
         - nohang-desktop
         - bpftune

@@ -1,0 +1,5 @@
+default_sched = "scx_pandemonium"
+default_mode = "Auto"
+
+[scheds.scx_lavd]
+auto_mode = ["--autopilot"]
