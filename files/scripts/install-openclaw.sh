@@ -14,6 +14,6 @@ HOME=/tmp npm install -g --prefix=/usr openclaw@latest
 # Clean up build-only dependencies to save image space
 # We leave nodejs because OpenClaw needs it to run!
 echo "==> Removing npm and build-time dependencies..."
-pacman -Rns --noconfirm npm cmake || true
+pacman -Rns --noconfirm cmake || true
 
 echo "==> OpenClaw installed successfully."

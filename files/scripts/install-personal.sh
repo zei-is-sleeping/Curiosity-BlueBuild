@@ -29,7 +29,7 @@ sudo -u builder bash -c '
         compsize btrfsmaintenance snapper podman podman-compose podman-docker fuse-overlayfs 
         slirp4netns crun netavark aardvark-dns distrobox toolbox skopeo xorg-xhost flatpak 
         obsidian btop tealdeer lazygit unrar zip evtest 
-        wev fuse2 appimagelauncher-bin python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
+        wev fuse2 python-pipx flatseal topgrade boxbuddy celluloid tesseract tesseract-data-eng 
         ydotool cava bc jq rsync wget wf-recorder hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
         polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode python-pip 
         python-pipx hyprland uwsm cliphist wl-clipboard adw-gtk-theme wireplumber intel-media-driver vulkan-intel
