@@ -33,6 +33,7 @@ sudo -u builder bash -c '
         ydotool cava bc jq rsync wget wf-recorder hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
         polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode python-pip 
         python-pipx hyprland uwsm cliphist wl-clipboard adw-gtk-theme wireplumber intel-media-driver vulkan-intel
+        papirus-icon-theme
 
         noctalia-git
 
