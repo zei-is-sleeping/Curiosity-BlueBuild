@@ -22,6 +22,7 @@ sudo -u builder bash -c '
         msi-ec-dkms-git
         noctalia-git
         noctalia-greeter-git
+        spotify
     )
     yes "" | yay -S --noconfirm --needed "${packages[@]}"
 '
