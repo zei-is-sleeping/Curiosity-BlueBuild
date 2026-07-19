@@ -5,8 +5,6 @@ base-image: ghcr.io/bootcrew/arch-bootc
 image-version: latest 
 
 modules:
-  # CachyOS related modifications like better repos and mirrorlists oh and kernel comes from here-
-  #
   - type: files
     files:
       - source: system
@@ -16,7 +14,16 @@ modules:
     scripts:
       - preset-cachyos.sh
 
-  # Minimalist startup for something that ALWAYS builds
+  - type: script
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "CachyOS Preset installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+
   - type: pacman
     install:
       packages:
@@ -37,40 +44,56 @@ modules:
         - scx-scheds 
         - scx-tools
 
-  # Setup Yay
   - type: script
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "Base pacman apps installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
     scripts:
       - setup-yay-user.sh
       - setup-v3-gaslight.sh
+
+  - type: script
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "yay installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
   - type: kargs
     kargs:
       - mitigations=off
       - nowatchdog
-      - rcutree.enable_rcu_lazy=1
       - nvidia_drm.modeset=1
       - nvidia_drm.fbdev=1
 
-  # Dotfiles installation
   - type: script 
     scripts:
       - install-dotfiles-deps.sh 
 
-  # My own favourites, doesn't include all so some of them could be a part of dotfiles
   - type: script 
     scripts:
       - install-aur-compiles.sh
       - install-personal.sh 
       - install-openclaw.sh
 
-  # All the root filesystem based configs go here
-  # - type: script 
-    # scripts:
-      # - install-sddm-qylock.sh
-
-  # cleanup the temporary builder user for yay
   - type: script 
-    scripts: 
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "AUR and personal packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+    scripts:
       - cleanup-yay-user.sh
 
   - type: systemd 
@@ -100,3 +123,12 @@ modules:
         - podman.socket
 
 
+  - type: script
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "Exporting layers..." -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'

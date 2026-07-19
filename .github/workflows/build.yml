@@ -2,15 +2,14 @@ name: bluebuild
 on:
   schedule:
     - cron:
-        "17 21 * * *" # build at 02:27 IST every day (in actuality its UTC though)
+        "17 21 * * *" # build at 02:47 IST, (21:17 UTC)
   push:
-    paths-ignore: # don't rebuild if only documentation has changed
+    paths-ignore: 
       - "**.md"
 
   pull_request:
-  workflow_dispatch: # allow manually triggering builds
+  workflow_dispatch: 
 concurrency:
-  # only run one build at a time
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
 jobs:
@@ -22,22 +21,45 @@ jobs:
       packages: write
       id-token: write
     strategy:
-      fail-fast: false # stop GH from cancelling all matrix builds if one fails
+      fail-fast: false 
       matrix:
         recipe:
-          # !! Add your recipes here
           - recipe.yml
     steps:
-      # the build is fully handled by the reusable github action
+      - name: Notify Build Started
+        run: |
+          curl -d "Building Curiosity OS..." \
+          -H "Title: GitHub Actions" \
+          -H "Priority: default" \
+          -H "Tags: hammer_and_wrench" \
+          ntfy.sh/${{ secrets.NTFY_TOPIC }}
+
       - name: Build Custom Image
         uses: blue-build/github-action@v1.11
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         with:
           recipe: ${{ matrix.recipe }}
           build_opts: "--no-sign"
-          # cosign_private_key: ${{ secrets.SIGNING_SECRET }}
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
-
-          # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
           use_cache: true
+
+      - name: Notify Build Success
+        if: success()
+        run: |
+          curl -d "SUCCESS" \
+          -H "Title: Build Complete!" \
+          -H "Priority: high" \
+          -H "Tags: white_check_mark" \
+          ntfy.sh/${{ secrets.NTFY_TOPIC }}
+
+      - name: Notify Build Failed
+        if: failure()
+        run: |
+          curl -d "FAILED" \
+          -H "Title: Build Crashed!" \
+          -H "Priority: urgent" \
+          -H "Tags: warning" \
+          ntfy.sh/${{ secrets.NTFY_TOPIC }}
