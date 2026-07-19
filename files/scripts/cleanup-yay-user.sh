@@ -12,12 +12,7 @@ userdel -r builder || true
 # 3. Remove the passwordless sudo bypass
 rm -f /etc/sudoers.d/builder-nopasswd
 
-# 4. Aggressively clean pacman caches manually
-echo "==> Emptying pacman cache..."
-rm -rf /usr/lib/sysimage/cache/pacman/pkg/* || true
-rm -rf /var/cache/pacman/pkg/* || true
-
-# 5. Clear systemd journal logs
+# 4. Clear systemd journal logs
 echo "==> Clearing build logs..."
 rm -rf /var/log/journal/* || true
 rm -rf /run/log/journal/* || true
