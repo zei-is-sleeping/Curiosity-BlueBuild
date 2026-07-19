@@ -47,7 +47,7 @@ sudo -u builder bash -c '
         thorium-browser-avx2-bin
         starship
 
-        scx-scheds cachyos-settings nohang fwupd bpftune
+        scx-scheds scx-tools cachyos-settings nohang fwupd bpftune
         preload-ng-git thermald switcheroo-control nvidia-prime mold
     )
     
