@@ -15,7 +15,7 @@ if [ -L "/opt" ]; then
     mkdir -p /opt
 fi
 
-echo "==> Installing personal & Ryoku packages..."
+echo "==> Installing personal packages..."
 
 sudo -u builder bash -c '
     packages=(
@@ -47,7 +47,7 @@ sudo -u builder bash -c '
         thorium-browser-avx2-bin
         starship
 
-        scx-sheds cachyos-settings nohang fwupd bpftune
+        scx-scheds cachyos-settings nohang fwupd bpftune
     )
     
     if [ ${#packages[@]} -gt 0 ]; then

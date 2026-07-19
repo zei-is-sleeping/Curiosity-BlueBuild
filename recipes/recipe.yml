@@ -75,6 +75,10 @@ modules:
         - bootc-fetch-apply-updates.timer
         - systemd-resolved
         - keyd
+        - scx 
+        - ananicy-cpp
+        - nohang-desktop
+        - bpftune
     user: 
       enabled: 
         - ydotool 
