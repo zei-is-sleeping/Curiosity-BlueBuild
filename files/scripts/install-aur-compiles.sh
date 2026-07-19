@@ -20,7 +20,7 @@ echo "==> Installing HEAVY AUR packages from source..."
 sudo -u builder bash -c '
     packages=(
         msi-ec-dkms-git
-        noctalia-git
+        cachyos/noctalia
         noctalia-greeter-git
         spotify
     )
