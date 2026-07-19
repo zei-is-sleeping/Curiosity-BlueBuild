@@ -6,6 +6,12 @@ image-version: latest
 
 modules:
   # CachyOS related modifications like better repos and mirrorlists oh and kernel comes from here-
+  #
+  - type: files
+    files:
+      - source: system
+        destination: / 
+
   - type: script
     scripts:
       - preset-cachyos.sh
@@ -90,3 +96,5 @@ modules:
         - mpd 
         - mpd-mpris
         - podman.socket
+
+
