@@ -23,7 +23,7 @@ sudo -u builder bash -c '
         mcontrolcenter msi-ec-dkms-git celluloid kitty github-cli power-profiles-daemon 
         bluez bluez-utils blueman mpd mpd-mpris mpv ffmpeg ffmpegthumbnailer nvidia-prime 
         atuin pipewire pipewire-pulse zoxide fish fisher rnote opentabletdriver p7zip 
-        aria2 freedownloadmanager gdu spotify-launcher spicetify-cli vesktop 
+        aria2 freedownloadmanager gdu spicetify-cli vesktop 
         inxi lshw lm_sensors nvtop iputils smartmontools nvidia-utils bind-utils iproute 
         nmap gamemode gamescope wine-cachyos winetricks rmpc surge btrfs-progs 
         compsize btrfsmaintenance snapper podman podman-compose podman-docker fuse-overlayfs 
