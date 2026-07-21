@@ -43,6 +43,7 @@ modules:
         - eza
         - scx-scheds 
         - scx-tools
+        - composefs
 
   - type: script
     secrets:
