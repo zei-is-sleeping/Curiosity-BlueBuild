@@ -50,6 +50,8 @@ sudo -u builder bash -c '
 
         scx-scheds scx-tools cachyos-settings nohang fwupd bpftune
         thermald switcheroo-control nvidia-prime mold
+
+        qemu-full libvirt virt-manager virt-viewer dnsmasq edk2-ovmf swtpm iptables-nft vde2 bridge-utils openbsd-netcat samba looking-glass-client
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
