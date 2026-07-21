@@ -116,6 +116,7 @@ modules:
         - nohang-desktop
         - bpftune
         - opt-overlay
+        - libvirtd.socket
     user: 
       enabled: 
         - ydotool 
