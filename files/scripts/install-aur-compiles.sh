@@ -23,6 +23,7 @@ sudo -u builder bash -c '
         cachyos/noctalia
         noctalia-greeter-git
         spotify
+        looking-glass-module-dkms
     )
     yes "" | yay -S --noconfirm --needed "${packages[@]}"
 '
