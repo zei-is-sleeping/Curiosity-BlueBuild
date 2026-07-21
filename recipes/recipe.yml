@@ -44,6 +44,7 @@ modules:
         - scx-scheds 
         - scx-tools
         - composefs
+        - podman
 
   - type: script
     secrets:
