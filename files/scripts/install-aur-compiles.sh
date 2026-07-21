@@ -24,6 +24,7 @@ sudo -u builder bash -c '
         noctalia-greeter-git
         spotify
         looking-glass-module-dkms
+        aur/looking-glass
     )
     yes "" | yay -S --noconfirm --needed "${packages[@]}"
 '

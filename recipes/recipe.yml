@@ -117,6 +117,10 @@ modules:
         - bpftune
         - opt-overlay
         - libvirtd.socket
+        - virtqemud.socket 
+        - virtnetworkd.socket 
+        - virtnodedevd.socket 
+        - virtstoraged.socket
     user: 
       enabled: 
         - ydotool 
