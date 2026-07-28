@@ -1,3 +1,7 @@
+[initial_session]
+command = "start-hyprland"
+user = "zei"
+
 [terminal]
 vt = 1
 

@@ -121,6 +121,8 @@ modules:
         - virtnetworkd.socket 
         - virtnodedevd.socket 
         - virtstoraged.socket
+      disabled:
+        - systemd-networkd
     user: 
       enabled: 
         - ydotool 
@@ -128,6 +130,9 @@ modules:
         - mpd 
         - mpd-mpris
 
+  - type: script
+    scripts:
+      - finalize-boot.sh
 
   - type: script
     secrets:

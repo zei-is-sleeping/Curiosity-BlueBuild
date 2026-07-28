@@ -1,0 +1,11 @@
+# ShanWan Android mode
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="2563", ATTR{idProduct}=="0527", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh add 2563 0527"
+SUBSYSTEM=="usb", ACTION=="remove", ATTR{idVendor}=="2563", ATTR{idProduct}=="0527", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh remove 2563 0527"
+
+# Microsoft Xbox 360 mode
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh add 045e 028e"
+SUBSYSTEM=="usb", ACTION=="remove", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh remove 045e 028e"
+
+# ZD-V+ mode
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="2563", ATTR{idProduct}=="0575", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh add 2563 0575"
+SUBSYSTEM=="usb", ACTION=="remove", ATTR{idVendor}=="2563", ATTR{idProduct}=="0575", RUN+="/var/home/zei/.local/bin/vm-gamepad-hotplug.sh remove 2563 0575"

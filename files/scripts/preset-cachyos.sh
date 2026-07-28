@@ -45,9 +45,4 @@ pacman -Rns --noconfirm linux || true
 pacman -Rns --noconfirm linux-headers || true
 find /usr/lib/modules -mindepth 1 -maxdepth 1 ! -name "*cachyos*" -exec rm -rf {} +
 
-echo "==> Moving CachyOS kernel to canonical bootc location..."
-KVER=$(ls /usr/lib/modules)
-cp /boot/vmlinuz-linux-cachyos-bore /usr/lib/modules/$KVER/vmlinuz
-cp /boot/initramfs-linux-cachyos-bore.img /usr/lib/modules/$KVER/initramfs.img
-
 echo "==> CachyOS Presets applied successfully."
