@@ -34,7 +34,8 @@ pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
 
 echo "Installing MULTILIB"
-sed -i '/^#\[multilib\]/,/^#Include/{s/^#//}' /etc/pacman.conf && pacman -Syu --noconfirm --needed
+echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+pacman -Syu --noconfirm --needed
 
 echo "==> Optimizing Mirrors..."
 pacman -Sy --noconfirm rate-mirrors
