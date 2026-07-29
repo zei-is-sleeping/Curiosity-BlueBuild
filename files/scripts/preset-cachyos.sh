@@ -33,6 +33,9 @@ pacman-key --lsign-key 3056513887B78AEB
 pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
 echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
 
+echo "Installing MULTILIB"
+sed -i '/^#\[multilib\]/,/^#Include/{s/^#//}' /etc/pacman.conf && pacman -Syu
+
 echo "==> Optimizing Mirrors..."
 pacman -Sy --noconfirm rate-mirrors
 rate-mirrors --allow-root arch > /etc/pacman.d/mirrorlist

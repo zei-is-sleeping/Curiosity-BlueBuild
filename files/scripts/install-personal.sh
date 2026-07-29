@@ -53,7 +53,7 @@ sudo -u builder bash -c '
 
         qemu-full libvirt virt-manager virt-viewer dnsmasq edk2-ovmf swtpm iptables-nft vde2 bridge-utils openbsd-netcat samba
 
-        wine-cachyos nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader mesa lib32-mesa gamescope lib32-gamescope mangohud lib32-mangohud dxvk-gplasync python python-rich python-tomli-w 
+        wine-cachyos nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader mesa lib32-mesa gamescope lib32-gamescope mangohud lib32-mangohud dxvk-gplasync-bin python python-rich python-tomli-w 
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
