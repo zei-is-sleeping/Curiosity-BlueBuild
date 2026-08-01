@@ -59,7 +59,7 @@ sudo -u builder bash -c '
 
         aur/zeit h-m-m-git pomo
 
-        haguichi
+        tailscale
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
