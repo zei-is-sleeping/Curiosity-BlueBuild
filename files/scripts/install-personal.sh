@@ -56,6 +56,8 @@ sudo -u builder bash -c '
         wine-cachyos nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader mesa lib32-mesa gamescope lib32-gamescope mangohud lib32-mangohud dxvk-gplasync-bin python python-rich python-tomli-w 
 
         libxcrypt-compat pavucontrol gnome-disk-utility moonlight-qt mgba-qt emulationstation-de
+
+        zeit h-m-m-git pomo kanban
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
