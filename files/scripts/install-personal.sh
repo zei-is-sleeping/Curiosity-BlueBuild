@@ -57,7 +57,7 @@ sudo -u builder bash -c '
 
         libxcrypt-compat pavucontrol gnome-disk-utility moonlight-qt mgba-qt emulationstation-de
 
-        zeit h-m-m-git pomo kanban
+        aur/zeit h-m-m-git pomo kanban
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
