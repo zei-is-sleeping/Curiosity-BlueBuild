@@ -59,7 +59,7 @@ sudo -u builder bash -c '
 
         aur/zeit h-m-m-git pomo
 
-        tailscale xdg-desktop-portal-hyprland
+        tailscale xdg-desktop-portal-hyprland steam
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
