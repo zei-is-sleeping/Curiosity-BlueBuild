@@ -42,7 +42,7 @@ sudo -u builder bash -c '
         ttf-roboto noto-fonts noto-fonts-cjk noto-fonts-emoji 
         trash-cli plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
         ouch zram-generator easyeffects keyd 
-        jujutsu
+        jujutsu sd ast-grep dust procs jc go-yq htmlq ripgrep-all yt-dlp
 
         zen-browser-bin
         thorium-browser-avx2-bin
