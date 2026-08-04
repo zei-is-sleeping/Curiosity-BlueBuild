@@ -60,6 +60,7 @@ sudo -u builder bash -c '
         aur/zeit h-m-m-git pomo
 
         tailscale xdg-desktop-portal-hyprland steam
+        opencode
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
