@@ -26,7 +26,7 @@ sudo -u builder bash -c '
         atuin pipewire pipewire-pulse zoxide fish fisher rnote opentabletdriver p7zip 
         aria2 freedownloadmanager gdu spicetify-cli vesktop 
         inxi lshw lm_sensors nvtop iputils smartmontools nvidia-utils bind-utils iproute 
-        gamemode gamescope wine-cachyos winetricks rmpc surge-bin btrfs-progs 
+        gamemode gamescope wine-cachyos winetricks rmpc btrfs-progs 
         compsize btrfsmaintenance fuse-overlayfs 
         xorg-xhost flatpak 
         obsidian btop tealdeer lazygit unrar zip evtest 
@@ -37,7 +37,7 @@ sudo -u builder bash -c '
         papirus-icon-theme wireguard-tools lsp-plugins firefoxpwa
 
 
-        apple-fonts upower adw-gtk-theme nwg-look nwg-displays qt6ct-kde greetd noctalia-greeter-git accountsservice qt6-wayland 
+        apple-fonts upower adw-gtk-theme nwg-look nwg-displays qt6ct-kde greetd accountsservice qt6-wayland 
 
         ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common
         ttf-roboto noto-fonts noto-fonts-cjk noto-fonts-emoji 
