@@ -62,6 +62,7 @@ sudo -u builder bash -c '
 
         tailscale xdg-desktop-portal-hyprland steam
         opencode astralrinth-bin
+        foliate
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
