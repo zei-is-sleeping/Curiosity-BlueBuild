@@ -20,8 +20,8 @@ echo "==> Installing HEAVY AUR packages from source..."
 sudo -u builder bash -c '
     packages=(
         msi-ec-dkms-git
-        cachyos/noctalia
-        noctalia-greeter-git
+        cachyos-extra-v3/noctalia
+        cachyos/noctalia-greeter
         spotify
         looking-glass-module-dkms
         aur/looking-glass
