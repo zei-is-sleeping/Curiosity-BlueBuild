@@ -56,10 +56,10 @@ optimize_mirrors() {
     rate-mirrors --allow-root arch > /etc/pacman.d/mirrorlist
 }
 time_step "preset: rank Arch mirrors" optimize_mirrors
-time_step "preset: synchronize and upgrade base image" pacman -Syu --noconfirm --needed
+time_step "preset: synchronize and upgrade base image" pacman -Syyu --noconfirm --needed
 
 echo "==> Swapping Arch kernel for CachyOS BORE..."
-time_step "preset: install CachyOS BORE kernel and NVIDIA modules" pacman -S --noconfirm --needed linux-cachyos-bore linux-cachyos-bore-headers linux-cachyos-bore-nvidia-open nvidia-utils
+time_step "preset: install CachyOS BORE kernel and NVIDIA modules" pacman -S --noconfirm --needed cachyos-v3/linux-cachyos-bore cachyos-v3/linux-cachyos-bore-headers cachyos-v3/linux-cachyos-bore-nvidia-open nvidia-utils
 
 echo "==> Purging stock Linux kernel..."
 remove_stock_kernel() {
