@@ -27,16 +27,26 @@ install_cachyos_repo() {
     sed -i 's/local is_znver_supported=.*/local is_znver_supported="1"/' "$work_dir/cachyos-repo/cachyos-repo.sh"
     sed -i 's/^    pacman -Syu$/    : # Upgrade once after every repository is configured./' "$work_dir/cachyos-repo/cachyos-repo.sh"
 
-    set +o pipefail
-    yes '' | "$work_dir/cachyos-repo/cachyos-repo.sh"
-    local installer_status=${PIPESTATUS[1]}
-    set -o pipefail
+    if ! (
+        cd "$work_dir/cachyos-repo"
+        set +o pipefail
+        yes '' | ./cachyos-repo.sh
+        status=${PIPESTATUS[1]}
+        set -o pipefail
+        exit "$status"
+    ); then
+        rm -rf "$work_dir"
+        return 1
+    fi
     rm -rf "$work_dir"
-    return "$installer_status"
 }
 
 echo "==> Injecting CachyOS Repositories (x86-64-v3)..."
 time_step "preset: install CachyOS repositories" install_cachyos_repo
+if ! pacman-conf --repo-list | grep -qx 'cachyos-v3'; then
+    echo "ERROR: CachyOS installer did not configure the cachyos-v3 repository." >&2
+    exit 1
+fi
 
 echo "==> Installing Chaotic-AUR..."
 install_chaotic_aur() {
