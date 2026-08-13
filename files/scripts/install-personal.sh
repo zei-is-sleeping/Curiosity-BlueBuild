@@ -24,7 +24,7 @@ time_step "packages: prepare builder home and /opt" prepare_package_environment
 echo "==> Installing personal packages..."
 
 packages=(
-        # Add packages that must be built from the AUR here.
+  sgdboop-bin
 )
 
 if [ ${#packages[@]} -gt 0 ]; then
