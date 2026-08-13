@@ -82,6 +82,7 @@ modules:
   - type: script
     scripts:
       - prepare-repository-packages.sh
+      - manage-package-cache-hooks.sh
 
   # === Hardware, Kernel & Power ===
   # Keep packages that may affect drivers, firmware, or initramfs in one transaction.
@@ -161,7 +162,6 @@ modules:
         - qt6-wayland
         - switcheroo-control
         - adw-gtk-theme
-        - papirus-icon-theme
         - cachyos-extra-v3/noctalia
         - cachyos/noctalia-greeter
   - type: script
@@ -219,6 +219,7 @@ modules:
         - noto-fonts-emoji
         - ttf-nerd-fonts-symbols
         - ttf-nerd-fonts-symbols-common
+        - papirus-icon-theme
   - type: script
     secrets: *ntfy-secret
     snippets:
@@ -347,6 +348,10 @@ modules:
     secrets: *ntfy-secret
     snippets:
       - 'curl -s -d "Personal applications installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+
+  - type: script
+    scripts:
+      - manage-package-cache-hooks.sh
 
   - type: script 
     scripts:
