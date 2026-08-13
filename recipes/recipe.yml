@@ -79,8 +79,12 @@ modules:
       - nvidia_drm.modeset=1
       - nvidia_drm.fbdev=1
 
-  # === Kernel, Drivers & System ===
-  # Keep packages with expensive hardware and initramfs hooks in one transaction.
+  - type: script
+    scripts:
+      - prepare-repository-packages.sh
+
+  # === Hardware, Kernel & Power ===
+  # Keep packages that may affect drivers, firmware, or initramfs in one transaction.
   - type: pacman
     install:
       packages:
@@ -94,11 +98,26 @@ modules:
         - lib32-mesa
         - mangohud
         - lib32-mangohud
+        - sof-firmware
         - cachyos-settings
         - nohang
         - fwupd
         - cachyos/bpftune-git
         - thermald
+  - type: script
+    secrets: &ntfy-secret
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "Hardware, kernel, and power packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+
+  # === System Utils ===
+  - type: pacman
+    install:
+      packages:
         - btop
         - inxi
         - lshw
@@ -119,14 +138,9 @@ modules:
         - upower
         - power-profiles-daemon
   - type: script
-    secrets: &ntfy-secret
-      - type: env
-        name: NTFY_TOPIC
-        mount:
-          type: env
-          name: NTFY_TOPIC
+    secrets: *ntfy-secret
     snippets:
-      - 'curl -s -d "Kernel, drivers, and system packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+      - 'curl -s -d "System utility packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
   # === Desktop & WM ===
   - type: pacman
@@ -174,7 +188,6 @@ modules:
         - pipewire-alsa
         - wireplumber
         - alsa-utils
-        - sof-firmware
         - pavucontrol
         - easyeffects
         - lsp-plugins
