@@ -33,7 +33,7 @@ packages=(
         cachyos-extra-v3/noctalia cachyos/noctalia-greeter
 
         # === Browsers ===
-        zen-browser-bin thorium-browser-avx2-bin
+        zen-browser-bin
 
         # === Audio Stack ===
         pipewire pipewire-pulse pipewire-alsa wireplumber
@@ -77,7 +77,7 @@ packages=(
         mesa lib32-mesa mangohud lib32-mangohud
 
         # === Kernel & Power ===
-        msi-ec-dkms-git scx-scheds scx-tools cachyos-settings
+        scx-scheds scx-tools cachyos-settings
         nohang fwupd bpftune thermald
 
         # === Virtualization ===
@@ -87,9 +87,9 @@ packages=(
         steam moonlight-qt mgba-qt emulationstation-de
 
         # === Personal Apps ===
-        mcontrolcenter celluloid vesktop obsidian foliate
+        celluloid vesktop obsidian foliate
         aria2 freedownloadmanager gdu imv
-        opencode astralrinth-bin h-m-m-git
+        opencode
 )
 
 timing_note "packages: yay transaction" "count=${#packages[@]} ${packages[*]}"

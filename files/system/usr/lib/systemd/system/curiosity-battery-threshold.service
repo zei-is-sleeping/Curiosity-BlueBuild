@@ -1,0 +1,10 @@
+[Unit]
+Description=Set MSI battery charge thresholds
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/curiosity-build/set-battery-threshold
+
+[Install]
+WantedBy=multi-user.target

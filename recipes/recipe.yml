@@ -112,6 +112,7 @@ modules:
         - scx_loader
         - nohang-desktop
         - bpftune
+        - curiosity-battery-threshold.service
         - virtqemud.socket 
         - virtnetworkd.socket 
         - virtnodedevd.socket 

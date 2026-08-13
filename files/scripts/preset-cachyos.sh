@@ -6,6 +6,7 @@ timing_start_script preset-cachyos
 
 echo "==> Unlocking pacman speed, aesthetics, and container compatibility..."
 configure_pacman() {
+    sed -i 's/^ParallelDownloads.*/ParallelDownloads = 10/' /etc/pacman.conf
     if ! grep -q '^DisableSandbox$' /etc/pacman.conf; then
         sed -i '/^Architecture = auto$/a DisableSandbox' /etc/pacman.conf
     fi
@@ -60,12 +61,6 @@ time_step "preset: install Chaotic-AUR repository" install_chaotic_aur
 echo "Installing MULTILIB"
 printf '\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n' >> /etc/pacman.conf
 
-echo "==> Optimizing Mirrors..."
-time_step "preset: install mirror optimizer" pacman -Sy --noconfirm --needed rate-mirrors
-optimize_mirrors() {
-    rate-mirrors --allow-root arch > /etc/pacman.d/mirrorlist
-}
-time_step "preset: rank Arch mirrors" optimize_mirrors
 time_step "preset: synchronize and upgrade base image" pacman -Syyu --noconfirm --needed
 
 echo "==> Swapping Arch kernel for CachyOS BORE..."

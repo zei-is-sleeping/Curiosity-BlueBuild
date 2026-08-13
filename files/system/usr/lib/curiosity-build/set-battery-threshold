@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+battery=/sys/class/power_supply/BAT1
+start_threshold=$battery/charge_control_start_threshold
+end_threshold=$battery/charge_control_end_threshold
+
+modprobe msi_ec
+
+for _ in {1..50}; do
+    if [ -w "$start_threshold" ] && [ -w "$end_threshold" ]; then
+        break
+    fi
+    sleep 0.1
+done
+
+if [ ! -w "$start_threshold" ] || [ ! -w "$end_threshold" ]; then
+    echo "MSI battery threshold controls are unavailable." >&2
+    exit 1
+fi
+
+printf '50\n' > "$start_threshold"
+printf '60\n' > "$end_threshold"
