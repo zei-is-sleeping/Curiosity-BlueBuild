@@ -24,76 +24,15 @@ time_step "packages: prepare builder home and /opt" prepare_package_environment
 echo "==> Installing personal packages..."
 
 packages=(
-        # === Desktop & WM ===
-        hyprland greetd accountsservice
-        cliphist wl-clipboard hyprsunset nwg-displays
-        xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-user-dirs xdg-utils
-        qt6ct-kde qt6-wayland polkit switcheroo-control
-        adw-gtk-theme papirus-icon-theme
-        cachyos-extra-v3/noctalia cachyos/noctalia-greeter
-
-        # === Browsers ===
-        zen-browser-bin
-
-        # === Audio Stack ===
-        pipewire pipewire-pulse pipewire-alsa wireplumber
-        alsa-utils sof-firmware pavucontrol easyeffects lsp-plugins
-        mpd mpd-mpris rmpc mpv mpv-mpris ffmpeg ffmpegthumbnailer
-        spotify spicetify-cli cava
-
-        # === Fonts ===
-        apple-fonts inter-font ttf-roboto ttf-twemoji
-        noto-fonts noto-fonts-cjk noto-fonts-emoji
-        ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common
-
-        # === Shell & Terminal ===
-        fish fisher atuin zoxide starship kitty
-
-        # === CLI Tools (AI + Personal) ===
-        ast-grep dust procs jc go-yq htmlq ripgrep-all yt-dlp
-        jq tealdeer trash-cli ouch trippy httpie
-        bc rsync wget curl openbsd-netcat
-        7zip unrar zip
-
-        # === Dev Tools ===
-        github-cli uv mold python python-rich python-tomli-w
-        libxcrypt-compat
-
-        # === System Utils ===
-        btop inxi lshw lm_sensors iputils bind iproute2 smartmontools
-        btrfs-progs compsize btrfsmaintenance fuse-overlayfs fuse2
-        zram-generator keyd evtest opentabletdriver xorg-xhost udiskie
-        gnome-keyring libnotify upower power-profiles-daemon
-
-        # === Networking ===
-        networkmanager iwd bluez bluez-utils blueman
-        wireguard-tools tailscale samba dnsmasq
-        bridge-utils vde2
-
-        # === GPU Drivers ===
-        nvidia-utils nvidia-prime lib32-nvidia-utils
-        vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
-        intel-media-driver intel-ucode
-        mesa lib32-mesa mangohud lib32-mangohud
-
-        # === Kernel & Power ===
-        scx-scheds scx-tools cachyos-settings
-        nohang fwupd cachyos/bpftune-git thermald
-
-        # === Virtualization ===
-        qemu-full libvirt virt-manager virt-viewer edk2-ovmf swtpm iptables
-
-        # === Gaming ===
-        steam moonlight-qt mgba-qt emulationstation-de
-
-        # === Personal Apps ===
-        celluloid vesktop obsidian foliate
-        aria2 freedownloadmanager gdu imv
-        opencode
+        # Add packages that must be built from the AUR here.
 )
 
-timing_note "packages: yay transaction" "count=${#packages[@]} ${packages[*]}"
-time_step "packages: install personal and AUR package set" sudo -u builder yay -S --noconfirm --needed "${packages[@]}"
+if [ ${#packages[@]} -gt 0 ]; then
+    timing_note "packages: yay transaction" "count=${#packages[@]} ${packages[*]}"
+    time_step "packages: install AUR package set" sudo -u builder yay -S --noconfirm --needed "${packages[@]}"
+else
+    timing_note "packages: yay transaction" "count=0 skipped"
+fi
 
 echo "==> Relocating /opt to /usr/lib/opt for OSTree persistence..."
 relocate_opt() {

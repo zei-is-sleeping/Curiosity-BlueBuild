@@ -79,6 +79,189 @@ modules:
       - nvidia_drm.modeset=1
       - nvidia_drm.fbdev=1
 
+  - type: pacman
+    install:
+      packages:
+        # === Desktop & WM ===
+        - hyprland
+        - greetd
+        - accountsservice
+        - cliphist
+        - wl-clipboard
+        - hyprsunset
+        - nwg-displays
+        - xdg-desktop-portal-gtk
+        - xdg-desktop-portal-hyprland
+        - xdg-user-dirs
+        - xdg-utils
+        - qt6ct-kde
+        - qt6-wayland
+        - switcheroo-control
+        - adw-gtk-theme
+        - papirus-icon-theme
+        - cachyos-extra-v3/noctalia
+        - cachyos/noctalia-greeter
+
+        # === Browsers ===
+        - zen-browser-bin
+
+        # === Audio Stack ===
+        - pipewire
+        - pipewire-pulse
+        - pipewire-alsa
+        - wireplumber
+        - alsa-utils
+        - sof-firmware
+        - pavucontrol
+        - easyeffects
+        - lsp-plugins
+        - mpd
+        - mpd-mpris
+        - rmpc
+        - mpv
+        - mpv-mpris
+        - ffmpeg
+        - ffmpegthumbnailer
+        - spotify
+        - spicetify-cli
+        - cava
+
+        # === Fonts ===
+        - apple-fonts
+        - inter-font
+        - ttf-roboto
+        - ttf-twemoji
+        - noto-fonts
+        - noto-fonts-cjk
+        - noto-fonts-emoji
+        - ttf-nerd-fonts-symbols
+        - ttf-nerd-fonts-symbols-common
+
+        # === Shell & Terminal ===
+        - fish
+        - fisher
+        - atuin
+        - zoxide
+        - starship
+        - kitty
+
+        # === CLI Tools (AI + Personal) ===
+        - ast-grep
+        - dust
+        - procs
+        - jc
+        - go-yq
+        - htmlq
+        - ripgrep-all
+        - yt-dlp
+        - tealdeer
+        - trash-cli
+        - ouch
+        - trippy
+        - httpie
+        - bc
+        - rsync
+        - wget
+        - openbsd-netcat
+        - 7zip
+        - unrar
+        - zip
+
+        # === Dev Tools ===
+        - github-cli
+        - uv
+        - python-rich
+        - python-tomli-w
+        - libxcrypt-compat
+
+        # === System Utils ===
+        - btop
+        - inxi
+        - lshw
+        - bind
+        - smartmontools
+        - compsize
+        - btrfsmaintenance
+        - fuse-overlayfs
+        - fuse2
+        - zram-generator
+        - keyd
+        - evtest
+        - opentabletdriver
+        - xorg-xhost
+        - udiskie
+        - gnome-keyring
+        - libnotify
+        - upower
+        - power-profiles-daemon
+
+        # === Networking ===
+        - networkmanager
+        - iwd
+        - bluez
+        - bluez-utils
+        - blueman
+        - wireguard-tools
+        - tailscale
+        - samba
+        - dnsmasq
+        - bridge-utils
+        - vde2
+
+        # === GPU Drivers ===
+        - nvidia-prime
+        - lib32-nvidia-utils
+        - vulkan-intel
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+        - intel-media-driver
+        - intel-ucode
+        - lib32-mesa
+        - mangohud
+        - lib32-mangohud
+
+        # === Kernel & Power ===
+        - cachyos-settings
+        - nohang
+        - fwupd
+        - cachyos/bpftune-git
+        - thermald
+
+        # === Virtualization ===
+        - qemu-full
+        - libvirt
+        - virt-manager
+        - virt-viewer
+        - edk2-ovmf
+        - swtpm
+
+        # === Gaming ===
+        - steam
+        - moonlight-qt
+        - mgba-qt
+        - emulationstation-de
+
+        # === Personal Apps ===
+        - celluloid
+        - vesktop
+        - obsidian
+        - foliate
+        - aria2
+        - freedownloadmanager
+        - gdu
+        - imv
+        - opencode
+
+  - type: script
+    secrets:
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "Repository packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+
   - type: script 
     scripts:
       - install-personal.sh 

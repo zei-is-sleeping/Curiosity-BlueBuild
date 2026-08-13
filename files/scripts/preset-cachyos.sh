@@ -70,7 +70,7 @@ time_step "preset: install Chaotic-AUR repository" install_chaotic_aur
 echo "Installing MULTILIB"
 printf '\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n' >> /etc/pacman.conf
 
-time_step "preset: synchronize and upgrade base image" pacman -Syyu --noconfirm --needed
+time_step "preset: synchronize and upgrade base image" pacman -Syu --noconfirm --needed
 
 echo "==> Swapping Arch kernel for CachyOS BORE..."
 time_step "preset: install CachyOS BORE kernel and NVIDIA modules" pacman -S --noconfirm --needed cachyos-v3/linux-cachyos-bore cachyos-v3/linux-cachyos-bore-headers cachyos-v3/linux-cachyos-bore-nvidia-open nvidia-utils
