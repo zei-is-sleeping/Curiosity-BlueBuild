@@ -24,53 +24,12 @@ modules:
     snippets:
       - 'curl -s -d "CachyOS Preset installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-  - type: pacman
-    install:
-      packages:
-        - base-devel
-        - expac
-        - git
-        - curl
-        - sudo
-        - mold
-        - yazi  
-        - nvim 
-        - unzip
-        - libarchive
-        - ripgrep 
-        - sd
-        - fd 
-        - fzf 
-        - bat 
-        - eza
-        - scx-scheds 
-        - scx-tools
-        - composefs
-        - podman
-        - cachyos/yay
-
   - type: script
-    secrets:
-      - type: env
-        name: NTFY_TOPIC
-        mount:
-          type: env
-          name: NTFY_TOPIC
     snippets:
-      - 'curl -s -d "Base pacman apps installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+      - 'echo "Base packages merged into preset-cachyos"'
     scripts:
       - setup-yay-user.sh
       - setup-v3-gaslight.sh
-
-  - type: script
-    secrets:
-      - type: env
-        name: NTFY_TOPIC
-        mount:
-          type: env
-          name: NTFY_TOPIC
-    snippets:
-      - 'curl -s -d "yay installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
   - type: kargs
     kargs:

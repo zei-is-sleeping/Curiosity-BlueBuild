@@ -6,7 +6,7 @@ timing_start_script preset-cachyos
 
 echo "==> Unlocking pacman speed, aesthetics, and container compatibility..."
 configure_pacman() {
-    sed -i 's/^ParallelDownloads.*/ParallelDownloads = 10/' /etc/pacman.conf
+    sed -i 's/^ParallelDownloads.*/ParallelDownloads = 30/' /etc/pacman.conf
     if ! grep -q '^DisableSandbox$' /etc/pacman.conf; then
         sed -i '/^Architecture = auto$/a DisableSandbox' /etc/pacman.conf
     fi
@@ -71,6 +71,14 @@ echo "Installing MULTILIB"
 printf '\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n' >> /etc/pacman.conf
 
 time_step "preset: synchronize and upgrade base image" pacman -Syu --noconfirm --needed
+
+echo "==> Installing base toolset (merged from pacman module)..."
+time_step "preset: install base tools and utilities" pacman -S --noconfirm --needed \
+    base-devel expac git curl sudo mold \
+    yazi nvim unzip libarchive \
+    ripgrep sd fd fzf bat eza \
+    scx-scheds scx-tools composefs podman \
+    cachyos/yay
 
 echo "==> Swapping Arch kernel for CachyOS BORE..."
 time_step "preset: install CachyOS BORE kernel and NVIDIA modules" pacman -S --noconfirm --needed cachyos-v3/linux-cachyos-bore cachyos-v3/linux-cachyos-bore-headers cachyos-v3/linux-cachyos-bore-nvidia-open nvidia-utils
