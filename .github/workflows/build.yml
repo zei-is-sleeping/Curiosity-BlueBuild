@@ -40,7 +40,7 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         with:
           recipe: ${{ matrix.recipe }}
-          build_opts: "--no-sign"
+          build_opts: "--no-sign --compression-format zstd"
           registry_token: ${{ github.token }}
           pr_event_number: ${{ github.event.number }}
           maximize_build_space: true

@@ -77,7 +77,6 @@ time_step "preset: install CachyOS BORE kernel and NVIDIA modules" pacman -S --n
 echo "==> Purging stock Linux kernel..."
 remove_stock_kernel() {
     pacman -Rns --noconfirm linux || true
-    pacman -Rns --noconfirm linux-headers || true
     find /usr/lib/modules -mindepth 1 -maxdepth 1 ! -name '*cachyos*' -exec rm -rf {} +
 }
 time_step "preset: remove stock kernel" remove_stock_kernel
