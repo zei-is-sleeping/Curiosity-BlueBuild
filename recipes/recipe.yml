@@ -191,7 +191,7 @@ modules:
         - thermald
 
         # === Virtualization ===
-        - qemu-full
+        - qemu-desktop
         - libvirt
         - virt-manager
         - virt-viewer
