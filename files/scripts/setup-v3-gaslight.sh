@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source /usr/lib/curiosity-build/timing.sh
+timing_start_script setup-v3-gaslight
+
 echo "==> Deploying global compiler gaslight wrappers for v3 architecture..."
 
-mkdir -p /usr/local/bin
+install_compiler_wrappers() {
+    mkdir -p /usr/local/bin
 
 # 1. C/C++ Compilers (GCC & Clang)
 cat << 'EOF' | tee /usr/local/bin/gcc /usr/local/bin/g++ /usr/local/bin/cc /usr/local/bin/c++ /usr/local/bin/clang /usr/local/bin/clang++ > /dev/null
@@ -43,6 +47,9 @@ chmod +x /usr/local/bin/clang /usr/local/bin/clang++ /usr/local/bin/rustc
 
 # 4. Go Compiler (Go uses env vars for architecture leveling)
 # We export this to the system profile so build scripts pick it up
-echo "export GOAMD64=v3" > /etc/profile.d/go-v3-gaslight.sh
+    echo "export GOAMD64=v3" > /etc/profile.d/go-v3-gaslight.sh
+}
+
+time_step "builder: install temporary x86-64-v3 compiler wrappers" install_compiler_wrappers
 
 echo "==> Hardware gaslighting active. All compilations will now safely target x86-64-v3."

@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+source /usr/lib/curiosity-build/timing.sh
+timing_start_script cleanup-yay-user
+
 echo "==> Nuke from orbit: Commencing final system cleanup..."
 
-# 1. Kill any lingering builder processes
-pkill -u builder || true
+cleanup_builder() {
+    pkill -u builder || true
+    userdel -r builder || true
+    rm -f /etc/sudoers.d/builder-nopasswd
+}
+time_step "cleanup: remove temporary AUR builder" cleanup_builder
 
-# 2. Completely obliterate the builder user
-userdel -r builder || true
+cleanup_compiler_wrappers() {
+    rm -f /usr/local/bin/gcc /usr/local/bin/g++ /usr/local/bin/cc /usr/local/bin/c++ \
+        /usr/local/bin/clang /usr/local/bin/clang++ /usr/local/bin/rustc \
+        /etc/profile.d/go-v3-gaslight.sh
+}
+time_step "cleanup: remove x86-64-v3 compiler wrappers" cleanup_compiler_wrappers
 
-# 3. Remove the passwordless sudo bypass
-rm -f /etc/sudoers.d/builder-nopasswd
-
-# 4. Clear systemd journal logs
 echo "==> Clearing build logs..."
-rm -rf /var/log/journal/* || true
-rm -rf /run/log/journal/* || true
+clear_build_journals() {
+    rm -rf /var/log/journal/* /run/log/journal/*
+}
+time_step "cleanup: clear build journals" clear_build_journals
 
 echo "==> Cleanup complete. Your atomic image is mathematically pristine."

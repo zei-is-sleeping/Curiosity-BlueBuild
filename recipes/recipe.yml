@@ -28,6 +28,7 @@ modules:
     install:
       packages:
         - base-devel
+        - expac
         - git
         - curl
         - sudo
@@ -37,6 +38,7 @@ modules:
         - unzip
         - libarchive
         - ripgrep 
+        - sd
         - fd 
         - fzf 
         - bat 
@@ -45,6 +47,7 @@ modules:
         - scx-tools
         - composefs
         - podman
+        - cachyos/yay
 
   - type: script
     secrets:
@@ -78,11 +81,6 @@ modules:
 
   - type: script 
     scripts:
-      - install-dotfiles-deps.sh 
-
-  - type: script 
-    scripts:
-      - install-aur-compiles.sh
       - install-personal.sh 
 
   - type: script 
@@ -104,7 +102,7 @@ modules:
         - power-profiles-daemon 
         - greetd 
         - NetworkManager
-        - fstrim 
+        - fstrim.timer
         - smartd
         - bootc-fetch-apply-updates.timer
         - systemd-resolved
@@ -114,8 +112,6 @@ modules:
         - scx_loader
         - nohang-desktop
         - bpftune
-        - opt-overlay
-        - libvirtd.socket
         - virtqemud.socket 
         - virtnetworkd.socket 
         - virtnodedevd.socket 
@@ -124,7 +120,6 @@ modules:
         - systemd-networkd
     user:
       enabled:
-        - opentabletdriver
         - mpd
         - mpd-mpris
 
