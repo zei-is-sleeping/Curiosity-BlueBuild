@@ -6,7 +6,7 @@ timing_start_script setup-yay-user
 
 echo "==> Optimizing makepkg.conf for Lightning Builds..."
 configure_makepkg() {
-    cat >> /tmp/tmp.40DlQq5NQX/makepkg.conf <<'EOF'
+    cat >> /etc/makepkg.conf <<'EOF'
 
 # Curiosity image-build overrides. Later assignments override Arch defaults.
 OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug !lto)
