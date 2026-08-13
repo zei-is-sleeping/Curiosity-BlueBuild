@@ -53,14 +53,14 @@ packages=(
         ast-grep dust procs jc go-yq htmlq ripgrep-all yt-dlp
         jq tealdeer trash-cli ouch trippy httpie
         bc rsync wget curl openbsd-netcat
-        p7zip unrar zip
+        7zip unrar zip
 
         # === Dev Tools ===
         github-cli uv mold python python-rich python-tomli-w
         libxcrypt-compat
 
         # === System Utils ===
-        btop inxi lshw lm_sensors iputils bind-utils iproute smartmontools
+        btop inxi lshw lm_sensors iputils bind iproute2 smartmontools
         btrfs-progs compsize btrfsmaintenance fuse-overlayfs fuse2
         zram-generator keyd evtest opentabletdriver xorg-xhost udiskie
         gnome-keyring libnotify upower power-profiles-daemon
@@ -78,10 +78,10 @@ packages=(
 
         # === Kernel & Power ===
         scx-scheds scx-tools cachyos-settings
-        nohang fwupd bpftune thermald
+        nohang fwupd cachyos/bpftune-git thermald
 
         # === Virtualization ===
-        qemu-full libvirt virt-manager virt-viewer edk2-ovmf swtpm iptables-nft
+        qemu-full libvirt virt-manager virt-viewer edk2-ovmf swtpm iptables
 
         # === Gaming ===
         steam moonlight-qt mgba-qt emulationstation-de
