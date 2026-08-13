@@ -49,13 +49,14 @@ if ! pacman-conf --repo-list | grep -qx 'cachyos-v3'; then
     exit 1
 fi
 
-disable_stale_cachyos_cdn() {
+prefer_cachyos_rerouted_cdn() {
     local mirrorlist
     for mirrorlist in /etc/pacman.d/cachyos-mirrorlist /etc/pacman.d/cachyos-v3-mirrorlist; do
         sed -i '\|^Server = https://cdn77\.cachyos\.org/|s|^|# Disabled in CI: |' "$mirrorlist"
+        sed -i '\|^# Server = https://cdn\.cachyos\.org/|s|^# ||' "$mirrorlist"
     done
 }
-time_step "preset: disable stale CachyOS CDN77 mirror" disable_stale_cachyos_cdn
+time_step "preset: prefer CachyOS rerouted CDN" prefer_cachyos_rerouted_cdn
 
 echo "==> Installing Chaotic-AUR..."
 install_chaotic_aur() {
