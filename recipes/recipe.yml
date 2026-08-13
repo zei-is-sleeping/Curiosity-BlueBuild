@@ -241,6 +241,7 @@ modules:
 
         # === Gaming ===
         - steam
+        - millennium
         - moonlight-qt
         - mgba-qt
         - emulationstation-de
