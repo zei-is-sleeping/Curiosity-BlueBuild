@@ -79,10 +79,59 @@ modules:
       - nvidia_drm.modeset=1
       - nvidia_drm.fbdev=1
 
+  # === Kernel, Drivers & System ===
+  # Keep packages with expensive hardware and initramfs hooks in one transaction.
   - type: pacman
     install:
       packages:
-        # === Desktop & WM ===
+        - nvidia-prime
+        - lib32-nvidia-utils
+        - vulkan-intel
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+        - intel-media-driver
+        - intel-ucode
+        - lib32-mesa
+        - mangohud
+        - lib32-mangohud
+        - cachyos-settings
+        - nohang
+        - fwupd
+        - cachyos/bpftune-git
+        - thermald
+        - btop
+        - inxi
+        - lshw
+        - bind
+        - smartmontools
+        - compsize
+        - btrfsmaintenance
+        - fuse-overlayfs
+        - fuse2
+        - zram-generator
+        - keyd
+        - evtest
+        - opentabletdriver
+        - xorg-xhost
+        - udiskie
+        - gnome-keyring
+        - libnotify
+        - upower
+        - power-profiles-daemon
+  - type: script
+    secrets: &ntfy-secret
+      - type: env
+        name: NTFY_TOPIC
+        mount:
+          type: env
+          name: NTFY_TOPIC
+    snippets:
+      - 'curl -s -d "Kernel, drivers, and system packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+
+  # === Desktop & WM ===
+  - type: pacman
+    install:
+      packages:
         - hyprland
         - greetd
         - accountsservice
@@ -101,11 +150,25 @@ modules:
         - papirus-icon-theme
         - cachyos-extra-v3/noctalia
         - cachyos/noctalia-greeter
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Desktop and WM packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Browsers ===
+  # === Browsers ===
+  - type: pacman
+    install:
+      packages:
         - zen-browser-bin
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Browser packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Audio Stack ===
+  # === Audio Stack ===
+  - type: pacman
+    install:
+      packages:
         - pipewire
         - pipewire-pulse
         - pipewire-alsa
@@ -125,8 +188,15 @@ modules:
         - spotify
         - spicetify-cli
         - cava
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Audio packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Fonts ===
+  # === Fonts ===
+  - type: pacman
+    install:
+      packages:
         - apple-fonts
         - inter-font
         - ttf-roboto
@@ -136,16 +206,30 @@ modules:
         - noto-fonts-emoji
         - ttf-nerd-fonts-symbols
         - ttf-nerd-fonts-symbols-common
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Font packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Shell & Terminal ===
+  # === Shell & Terminal ===
+  - type: pacman
+    install:
+      packages:
         - fish
         - fisher
         - atuin
         - zoxide
         - starship
         - kitty
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Shell and terminal packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === CLI Tools (AI + Personal) ===
+  # === CLI Tools (AI + Personal) ===
+  - type: pacman
+    install:
+      packages:
         - ast-grep
         - dust
         - procs
@@ -166,36 +250,29 @@ modules:
         - 7zip
         - unrar
         - zip
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "CLI tool packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Dev Tools ===
+  # === Dev Tools ===
+  - type: pacman
+    install:
+      packages:
         - github-cli
         - uv
         - python-rich
         - python-tomli-w
         - libxcrypt-compat
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Development packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === System Utils ===
-        - btop
-        - inxi
-        - lshw
-        - bind
-        - smartmontools
-        - compsize
-        - btrfsmaintenance
-        - fuse-overlayfs
-        - fuse2
-        - zram-generator
-        - keyd
-        - evtest
-        - opentabletdriver
-        - xorg-xhost
-        - udiskie
-        - gnome-keyring
-        - libnotify
-        - upower
-        - power-profiles-daemon
-
-        # === Networking ===
+  # === Networking ===
+  - type: pacman
+    install:
+      packages:
         - networkmanager
         - iwd
         - bluez
@@ -207,41 +284,43 @@ modules:
         - dnsmasq
         - bridge-utils
         - vde2
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Networking packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === GPU Drivers ===
-        - nvidia-prime
-        - lib32-nvidia-utils
-        - vulkan-intel
-        - vulkan-icd-loader
-        - lib32-vulkan-icd-loader
-        - intel-media-driver
-        - intel-ucode
-        - lib32-mesa
-        - mangohud
-        - lib32-mangohud
-
-        # === Kernel & Power ===
-        - cachyos-settings
-        - nohang
-        - fwupd
-        - cachyos/bpftune-git
-        - thermald
-
-        # === Virtualization ===
+  # === Virtualization ===
+  - type: pacman
+    install:
+      packages:
         - qemu-full
         - libvirt
         - virt-manager
         - virt-viewer
         - edk2-ovmf
         - swtpm
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Virtualization packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Gaming ===
+  # === Gaming ===
+  - type: pacman
+    install:
+      packages:
         - steam
         - moonlight-qt
         - mgba-qt
         - emulationstation-de
+  - type: script
+    secrets: *ntfy-secret
+    snippets:
+      - 'curl -s -d "Gaming packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
-        # === Personal Apps ===
+  # === Personal Apps ===
+  - type: pacman
+    install:
+      packages:
         - celluloid
         - vesktop
         - obsidian
@@ -251,16 +330,10 @@ modules:
         - gdu
         - imv
         - opencode
-
   - type: script
-    secrets:
-      - type: env
-        name: NTFY_TOPIC
-        mount:
-          type: env
-          name: NTFY_TOPIC
+    secrets: *ntfy-secret
     snippets:
-      - 'curl -s -d "Repository packages installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
+      - 'curl -s -d "Personal applications installed!" -H "Title: Layer Complete" -H "Tags: hourglass" "ntfy.sh/$NTFY_TOPIC" || true'
 
   - type: script 
     scripts:
