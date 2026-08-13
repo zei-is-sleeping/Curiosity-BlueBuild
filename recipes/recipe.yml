@@ -84,7 +84,6 @@ modules:
     scripts:
       - install-aur-compiles.sh
       - install-personal.sh 
-      - install-openclaw.sh
 
   - type: script 
     secrets:
@@ -123,11 +122,10 @@ modules:
         - virtstoraged.socket
       disabled:
         - systemd-networkd
-    user: 
-      enabled: 
-        - ydotool 
-        - opentabletdriver 
-        - mpd 
+    user:
+      enabled:
+        - opentabletdriver
+        - mpd
         - mpd-mpris
 
   - type: script

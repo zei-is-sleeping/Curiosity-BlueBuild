@@ -19,50 +19,71 @@ echo "==> Installing personal packages..."
 
 sudo -u builder bash -c '
     packages=(
-        # Your Personal Stuff
-        mcontrolcenter msi-ec-dkms-git celluloid kitty github-cli power-profiles-daemon 
-        bluez bluez-utils blueman mpd mpd-mpris mpv ffmpeg ffmpegthumbnailer nvidia-prime 
-        sof-firmware alsa-utils 
-        atuin pipewire pipewire-pulse zoxide fish fisher rnote opentabletdriver p7zip 
-        aria2 freedownloadmanager gdu spicetify-cli vesktop 
-        inxi lshw lm_sensors nvtop iputils smartmontools nvidia-utils bind-utils iproute 
-        gamemode gamescope wine-cachyos winetricks rmpc btrfs-progs 
-        compsize btrfsmaintenance fuse-overlayfs 
-        xorg-xhost flatpak 
-        obsidian btop tealdeer lazygit unrar zip evtest 
-        wev fuse2 uv flatseal celluloid tesseract tesseract-data-eng 
-        ydotool cava bc jq rsync wget hyprsunset xdg-user-dirs pipewire pipewire-alsa iwd networkmanager 
-        polkit gnome-keyring curl libnotify python xdg-utils flatpak ffmpeg mpv mpv-mpris songrec intel-ucode 
-        hyprland cliphist wl-clipboard adw-gtk-theme wireplumber intel-media-driver vulkan-intel
-        papirus-icon-theme wireguard-tools lsp-plugins firefoxpwa
+        # === Desktop & WM ===
+        hyprland greetd accountsservice
+        cliphist wl-clipboard hyprsunset nwg-displays
+        xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-user-dirs xdg-utils
+        qt6ct-kde qt6-wayland polkit switcheroo-control
+        adw-gtk-theme papirus-icon-theme
 
+        # === Browsers ===
+        zen-browser-bin thorium-browser-avx2-bin
 
-        apple-fonts upower adw-gtk-theme nwg-look nwg-displays qt6ct-kde greetd accountsservice qt6-wayland 
+        # === Audio Stack ===
+        pipewire pipewire-pulse pipewire-alsa wireplumber
+        alsa-utils sof-firmware pavucontrol easyeffects lsp-plugins
+        mpd mpd-mpris rmpc mpv mpv-mpris ffmpeg ffmpegthumbnailer
+        spicetify-cli cava
 
+        # === Fonts ===
+        apple-fonts inter-font ttf-roboto ttf-twemoji
+        noto-fonts noto-fonts-cjk noto-fonts-emoji
         ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common
-        ttf-roboto noto-fonts noto-fonts-cjk noto-fonts-emoji 
-        trash-cli plocate trippy imv httpie udiskie inter-font ttf-twemoji xdg-desktop-portal-gtk 
-        ouch zram-generator easyeffects keyd 
-        jujutsu sd ast-grep dust procs jc go-yq htmlq ripgrep-all yt-dlp
 
-        zen-browser-bin
-        thorium-browser-avx2-bin
-        starship
+        # === Shell & Terminal ===
+        fish fisher atuin zoxide starship kitty
 
-        scx-scheds scx-tools cachyos-settings nohang fwupd bpftune
-        thermald switcheroo-control nvidia-prime mold
+        # === CLI Tools (AI + Personal) ===
+        sd ast-grep dust procs jc go-yq htmlq ripgrep-all yt-dlp
+        jq tealdeer trash-cli ouch trippy httpie
+        bc rsync wget curl openbsd-netcat
+        p7zip unrar zip
 
-        qemu-full libvirt virt-manager virt-viewer dnsmasq edk2-ovmf swtpm iptables-nft vde2 bridge-utils openbsd-netcat samba
+        # === Dev Tools ===
+        github-cli uv mold python python-rich python-tomli-w
+        libxcrypt-compat
 
-        wine-cachyos nvidia-utils lib32-nvidia-utils vulkan-icd-loader lib32-vulkan-icd-loader mesa lib32-mesa gamescope lib32-gamescope mangohud lib32-mangohud dxvk-gplasync-bin python python-rich python-tomli-w 
+        # === System Utils ===
+        btop inxi lshw lm_sensors iputils bind-utils iproute smartmontools
+        btrfs-progs compsize btrfsmaintenance fuse-overlayfs fuse2
+        zram-generator keyd evtest opentabletdriver xorg-xhost udiskie
+        gnome-keyring libnotify upower power-profiles-daemon
 
-        libxcrypt-compat pavucontrol gnome-disk-utility moonlight-qt mgba-qt emulationstation-de
+        # === Networking ===
+        networkmanager iwd bluez bluez-utils blueman
+        wireguard-tools tailscale samba dnsmasq
+        bridge-utils vde2
 
-        aur/zeit h-m-m-git pomo
+        # === GPU Drivers ===
+        nvidia-utils nvidia-prime lib32-nvidia-utils
+        vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
+        intel-media-driver intel-ucode
+        mesa lib32-mesa mangohud lib32-mangohud
 
-        tailscale xdg-desktop-portal-hyprland steam
-        opencode astralrinth-bin
-        foliate
+        # === Kernel & Power ===
+        msi-ec-dkms-git scx-scheds scx-tools cachyos-settings
+        nohang fwupd bpftune thermald
+
+        # === Virtualization ===
+        qemu-full libvirt virt-manager virt-viewer edk2-ovmf swtpm iptables-nft
+
+        # === Gaming ===
+        steam moonlight-qt mgba-qt emulationstation-de
+
+        # === Personal Apps ===
+        mcontrolcenter celluloid vesktop obsidian foliate
+        aria2 freedownloadmanager gdu imv
+        opencode astralrinth-bin h-m-m-git
     )
     
     if [ ${#packages[@]} -gt 0 ]; then
@@ -83,3 +104,13 @@ rm -rf /opt
 mkdir -p /opt
 
 echo "==> Personal packages installed."
+
+echo "==> Removing obsolete packages from the base image..."
+obsolete=()
+for package in nodejs npm go obs-studio rpm-tools; do
+    pacman -Qq "$package" &>/dev/null && obsolete+=("$package")
+done
+
+if [ ${#obsolete[@]} -gt 0 ]; then
+    pacman -Rns --noconfirm "${obsolete[@]}"
+fi
