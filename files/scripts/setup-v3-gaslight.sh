@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source /usr/lib/curiosity-build/timing.sh
+source /usr/lib/zeit-build/timing.sh
 timing_start_script setup-v3-gaslight
 
 echo "==> Deploying global compiler gaslight wrappers for v3 architecture..."

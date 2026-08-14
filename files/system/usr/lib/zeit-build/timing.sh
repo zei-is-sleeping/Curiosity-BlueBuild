@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-: "${TIMING_DIR:=/usr/share/curiosity-build}"
+: "${TIMING_DIR:=/usr/share/zeit-build}"
 : "${TIMING_LOG:=$TIMING_DIR/timings.tsv}"
 
 mkdir -p "$TIMING_DIR"
@@ -65,7 +65,7 @@ write_timing_report() {
     local report="$TIMING_DIR/blame.txt"
 
     {
-        printf 'Curiosity image build timing (slowest first)\n'
+        printf 'Zeit image build timing (slowest first)\n'
         printf 'Cached layers retain the timing from the build that produced them.\n'
         printf 'milliseconds\tstatus\tstep\tdetail\n'
         sort -t $'\t' -k1,1nr "$TIMING_LOG"
@@ -76,7 +76,7 @@ write_package_report() {
     local report="$TIMING_DIR/packages.txt"
 
     {
-        printf 'Curiosity packages present at the end of the image build (largest first)\n'
+        printf 'Zeit packages present at the end of the image build (largest first)\n'
         printf 'installed_bytes\tpackage\tversion\n'
         expac -Q '%m\t%n\t%v' | sort -t $'\t' -k1,1nr
     } > "$report"

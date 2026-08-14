@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source /usr/lib/curiosity-build/timing.sh
+source /usr/lib/zeit-build/timing.sh
 timing_start_script preset-cachyos
 
 echo "==> Unlocking pacman speed, aesthetics, and container compatibility..."

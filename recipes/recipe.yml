@@ -1,5 +1,5 @@
-name: curiosity
-description: curiosity killed the cat, but its not dead yet
+name: zeit
+description: time flies, but this image makes every second count
 
 base-image: ghcr.io/bootcrew/arch-bootc
 image-version: latest 
@@ -259,7 +259,7 @@ modules:
         - scx_loader
         - nohang-desktop
         - bpftune
-        - curiosity-battery-threshold.service
+        - zeit-battery-threshold.service
         - virtqemud.socket 
         - virtnetworkd.socket 
         - virtnodedevd.socket 

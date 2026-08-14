@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source /usr/lib/curiosity-build/timing.sh
+source /usr/lib/zeit-build/timing.sh
 timing_start_script install-personal
 
 echo "==> Preparing builder environment for personal packages..."

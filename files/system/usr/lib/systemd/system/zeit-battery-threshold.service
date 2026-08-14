@@ -4,7 +4,7 @@ After=systemd-modules-load.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/lib/curiosity-build/set-battery-threshold
+ExecStart=/usr/lib/zeit-build/set-battery-threshold
 
 [Install]
 WantedBy=multi-user.target

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source /usr/lib/curiosity-build/timing.sh
+source /usr/lib/zeit-build/timing.sh
 timing_start_script setup-yay-user
 
 echo "==> Optimizing makepkg.conf for Lightning Builds..."
 configure_makepkg() {
     cat >> /etc/makepkg.conf <<'EOF'
 
-# Curiosity image-build overrides. Later assignments override Arch defaults.
+# Zeit image-build overrides. Later assignments override Arch defaults.
 OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug !lto)
 LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-mllvm -Wl,-instcombine-lower-dbg-declare=0 -fuse-ld=mold"
 RUSTFLAGS="-C opt-level=2 -C target-cpu=native -C link-arg=-fuse-ld=mold"

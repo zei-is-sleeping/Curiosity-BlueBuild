@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Notify Build Started
         run: |
-          curl -d "Building Curiosity OS..." \
+          curl -d "Building Zeit OS..." \
           -H "Title: GitHub Actions" \
           -H "Priority: default" \
           -H "Tags: hammer_and_wrench" \
