@@ -209,12 +209,12 @@ modules:
         - celluloid
         - vesktop
         - obsidian
-        - foliate
         - aria2
         - freedownloadmanager
         - gdu
         - imv
         - opencode
+        - koodo-reader-bin
 
   - type: script
     secrets:
