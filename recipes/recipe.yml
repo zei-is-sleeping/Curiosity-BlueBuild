@@ -204,6 +204,7 @@ modules:
         - moonlight-qt
         - mgba-qt
         - emulationstation-de
+        - flatpak
 
         # === Personal Apps ===
         - celluloid
